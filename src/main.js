@@ -1,12 +1,19 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import Vant from 'vant'
+import 'vant/lib/index.css'
+import './styles/index.scss'
+import HttpInstaller from './http' // http请求封装
+import './permission' // 路由权限控制
 
-Vue.config.productionTip = false;
+Vue.use(Vant)
+Vue.use(HttpInstaller)
+Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
-  render: (h) => h(App),
-}).$mount("#app");
+  render: (h) => h(App)
+}).$mount('#app')

@@ -1,32 +1,57 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view />
+    <van-tabbar v-if="isShowTabbar" v-model="active">
+      <van-tabbar-item
+        v-for="item in tabbarList"
+        :key="item.name"
+        :name="item.name"
+        :icon="item.icon"
+        @click="toSkip(item.name)"
+      >
+        {{ item.text }}
+      </van-tabbar-item>
+    </van-tabbar>
+    <keep-alive :include="keepAliveList">
+      <router-view />
+    </keep-alive>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+export default {
+  data() {
+    return {
+      active: 'Home',
+      tabbarList: [
+        { name: 'Follw', icon: 'like', text: '关注列表' },
+        { name: 'Home', icon: 'newspaper', text: '关注预览' },
+        { name: 'Report', icon: 'bars', text: '报表目录' }
+      ]
+    }
+  },
+  watch: {
+    $route(to) {
+      this.active = to.name
+    }
+  },
+  computed: {
+    // 通过路由名称，根据白名单匹配是否展示tabbar
+    isShowTabbar() {
+      return ['Home', 'Follw', 'Report'].includes(this.$route.name)
+    },
+    // 通过遍历路由表，获取需要缓存的页面，meta.keepAlive:true
+    keepAliveList() {
+      return this.$router.options.routes
+        .filter((route) => route.meta && route.meta.keepAlive)
+        .map((route) => route.name)
+    }
+  },
+  methods: {
+    // 跳转路由
+    toSkip(name) {
+      this.$router.push({ name })
     }
   }
 }
-</style>
+</script>
+
+<style lang="scss"></style>

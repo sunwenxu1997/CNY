@@ -1,0 +1,8 @@
+$primary-color: #2b46cc; // 主题颜色配置
+
+.van-tabbar-item--active{
+    color: $primary-color;
+}
+.van-button--info{
+    background-color: $primary-color;
+}
