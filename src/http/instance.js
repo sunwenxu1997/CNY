@@ -26,10 +26,10 @@ instance.interceptors.response.use(
         }
         if (res.code !== 200) {
             Toast({
-                message: res.msg || 'Error',
+                message: res.chnDesc || 'Error',
                 type: 'fail'
             });
-            return Promise.reject(new Error(res.msg || 'Error'))
+            return Promise.reject(new Error(res.chnDesc || 'Error'))
         } else {
             return res
         }

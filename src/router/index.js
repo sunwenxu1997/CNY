@@ -45,10 +45,12 @@ const routes = [
   { path: '*', redirect: '/404' }
 ];
 
-const router = new VueRouter({
+const createRouter = () => new VueRouter({
   scrollBehavior: () => ({ y: 0 }),
   routes,
 });
+
+const router = createRouter();
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || "数字欧普";

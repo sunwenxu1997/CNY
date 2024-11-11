@@ -1,8 +1,7 @@
 <template>
   <div>
-    <!-- 按钮点击计算加1 -->
-    <p>{{count}}</p>
-    <van-button @click="count++">点击计算</van-button>
+    <!-- 退出登录 -->
+    <van-button @click="logout">退出登录</van-button>
   </div>
 </template>
 
@@ -10,8 +9,12 @@
 export default {
   name: 'Home',
   data() {
-    return {
-      count: 0
+    return {}
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
 }
