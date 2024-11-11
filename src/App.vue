@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'app-has-tabbar': isShowTabbar }">
     <van-tabbar v-if="isShowTabbar" v-model="active">
       <van-tabbar-item
         v-for="item in tabbarList"
@@ -54,4 +54,8 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.app-has-tabbar {
+  height: calc(100% - 50px) !important;
+}
+</style>
