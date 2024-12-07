@@ -9,7 +9,7 @@
           <img class="gai-zi" style="width: 24%; margin-top: -7%; left: -3px" src="@/assets/toothpaste/盖子.png" alt="" />
           <img style="width: 0.8%; margin-top: -14.5%; right: -47px" src="@/assets/toothpaste/衔接.png" alt="" />
         </div>
-        <img class="zheng-ge" style="width: 35%" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
+        <img class="zheng-ge" style="width: 40%" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
         <div class="small-hands">
           <img class="click" src="@/assets/toothpaste/点击光效.png" alt="" />
           <img class="hands" src="@/assets/toothpaste/点击小手.png" alt="" />
