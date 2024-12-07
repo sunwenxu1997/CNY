@@ -3,19 +3,35 @@
     <div class="content">
       <img style="width: 90%" class="title" src="@/assets/toothpaste/好运文字.png" alt="" />
       <div class="t-body">
-        <img style="width: 40%" @click="" src="@/assets/toothpaste/整个牙膏.png" alt="" />
+        <img style="width: 40%" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
         <div class="small-hands">
           <img class="click" src="@/assets/toothpaste/点击光效.png" alt="" />
           <img class="hands" src="@/assets/toothpaste/点击小手.png" alt="" />
         </div>
       </div>
-      <img style="width: 90%; margin-top: 5%" src="@/assets/toothpaste/狂点牙膏释放好运.png" alt="" />
+      <img style="width: 90%; margin-top: 5%" class="hao-yun" src="@/assets/toothpaste/狂点牙膏释放好运.png" alt="" />
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+// 引入gsap
+import { gsap } from 'gsap'
+export default {
+  methods: {
+    clickBody() {
+      // 隐藏其他文字
+      gsap.to('.title', { opacity: 0, duration: 0.5 })
+      // 隐藏好运文字
+      gsap.to('.hao-yun', { opacity: 0, duration: 0.5 })
+      // 隐藏点击光效
+      gsap.to('.small-hands', { opacity: 0, duration: 0.5 })
+
+      // 点击牙膏，通过gsap.timeline控制牙膏上移
+      gsap.timeline().to('.t-body img', { y: '-74%', duration: 0.5 })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -37,9 +53,7 @@ export default {}
   .content {
     position: relative;
     width: 100%;
-    height: 100%;
     .title {
-      margin-top: 20%;
       margin-bottom: 13%;
     }
     .t-body {
