@@ -6,14 +6,10 @@
         <div class="pin-jie-body">
           <img style="width: 40%" src="@/assets/toothpaste/牙膏身体.png" alt="" />
           <img style="width: 11%; margin-top: -3%; z-index: 2" src="@/assets/toothpaste/牙膏头.png" alt="" />
-          <img
-            class="gai-zi"
-            style="width: 24%; margin-top: -8%; left: -3px"
-            src="@/assets/toothpaste/盖子.png"
-            alt=""
-          />
+          <img class="gai-zi" style="width: 24%; margin-top: -7%; left: -3px" src="@/assets/toothpaste/盖子.png" alt="" />
+          <img style="width: 0.8%; margin-top: -14.5%; right: -47px" src="@/assets/toothpaste/衔接.png" alt="" />
         </div>
-        <img style="width: 40%;" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
+        <img class="zheng-ge" style="width: 40%;" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
         <div class="small-hands">
           <img class="click" src="@/assets/toothpaste/点击光效.png" alt="" />
           <img class="hands" src="@/assets/toothpaste/点击小手.png" alt="" />
@@ -40,16 +36,15 @@ export default {
       // 隐藏好运文字
       gsap.to('.hao-yun', { opacity: 0, duration: 0.5 })
       // 隐藏点击光效
-      gsap.to(['.small-hands', '.pin-jie-body'], { opacity: 0, duration: 0.5 })
+      gsap.to('.small-hands', { opacity: 0, duration: 0.5 })
 
+      const tl = gsap.timeline()
       // 点击牙膏，通过gsap.timeline控制牙膏上移
-      gsap.timeline().to('.t-body img', {
-        y: '-33vh',
-        duration: 0.5,
-        onComplete: () => {
-          this.getReadyToSqueeze = true
-        }
-      })
+      tl.to(['.zheng-ge', '.pin-jie-body'], { y: '-33vh', duration: 0.5 })
+      tl.to('.pin-jie-body', { opacity: 1, duration: 0 })
+      tl.to('.zheng-ge', { opacity: 0, duration: 0 })
+      // 打开盖子
+      tl.to('.gai-zi', { rotate: -120, duration: 0.5, transformOrigin: '100% 0%' })
     }
   }
 }
@@ -127,6 +122,7 @@ export default {
 .pin-jie-body {
   position: absolute;
   pointer-events: none;
+  opacity: 0;
   img {
     position: relative;
     z-index: 5;
