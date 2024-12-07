@@ -6,8 +6,13 @@
         <div class="pin-jie-body">
           <img style="width: 40%" src="@/assets/toothpaste/牙膏身体.png" alt="" />
           <img style="width: 11%; margin-top: -3%; z-index: 2" src="@/assets/toothpaste/牙膏头.png" alt="" />
-          <img class="gai-zi" style="width: 24%; margin-top: -7%; left: -3px" src="@/assets/toothpaste/盖子.png" alt="" />
-          <img style="width: 0.8%; margin-top: -14.5%; right: -45px;" src="@/assets/toothpaste/衔接.png" alt="" />
+          <img class="gai-zi" style="width: 24%; margin-top: -7%; left: -6px" src="@/assets/toothpaste/盖子.png" alt="" />
+          <img style="width: 0.8%; margin-top: -14.5%; right: -44px" src="@/assets/toothpaste/衔接.png" alt="" />
+          <div class="bubble-box">
+            <div :class="`bubble ${item.size}`" v-for="(item, index) in dotList" :key="index">
+              <img :src="item.url" alt="" />
+            </div>
+          </div>
         </div>
         <img class="zheng-ge" style="width: 40%" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
         <div class="small-hands">
@@ -23,14 +28,24 @@
 <script>
 // 引入gsap
 import { gsap } from 'gsap'
+import { randomNumber } from '@/utils'
 export default {
   data() {
     return {
-      getReadyToSqueeze: false
+      getReadyToSqueeze: false,
+      dotNum: 50,
+      dotList: [],
+      elements: ['锦鲤元素.png', '桃花元素.png', '元宝元素.png']
     }
+  },
+  mounted() {
+    // 开发基于390px宽度调试，其他等比例缩放
+    const scale = 390 / window.innerWidth
+    document.querySelector('.content').style.transform = `scale(${scale})`
   },
   methods: {
     clickBody() {
+      this.initBubble()
       // 隐藏其他文字
       gsap.to('.title', { opacity: 0, duration: 0.5 })
       // 隐藏好运文字
@@ -44,13 +59,54 @@ export default {
       tl.to('.pin-jie-body', { opacity: 1, duration: 0 })
       tl.to('.zheng-ge', { opacity: 0, duration: 0 })
       // 打开盖子
-      tl.to('.gai-zi', { rotate: -120, duration: 0.5, transformOrigin: '100% 0%' })
+      tl.to('.gai-zi', {
+        rotate: -120,
+        duration: 0.5,
+        transformOrigin: '100% 0%',
+        onComplete: () => {
+          this.playBubble()
+        }
+      })
+    },
+    initBubble() {
+      const sizes = ['small', 'medium', 'large']
+      for (let i = 0; i < this.dotNum; i++) {
+        const sizeIndex = randomNumber(0, 2)
+        const size = sizes[sizeIndex]
+        const speed = 3 - sizeIndex
+        const url = require(`../../assets/${this.elements[sizeIndex]}`)
+        this.dotList.push({ size: `${size}Bubble`, url, speed })
+      }
+    },
+    playBubble() {
+      console.log(this.dotList)
+      const startY = 0,
+        endY = 700
+
+      this.dotList.forEach((item, i) => {
+        const { speed } = item
+        const bubble = document.querySelectorAll('.bubble')[i]
+        const element = document.querySelectorAll('.bubble img')[i]
+        gsap.to(element, { repeat: -1, duration: 5, rotate: 360, repeatDelay: Math.random() * 5 })
+        const particles = gsap.timeline({})
+        // timeScale 控制动画速度
+        gsap.to(particles, { timeScale: 1 })
+        particles.set(bubble, { y: startY, x: 0, scale: 0.5, duration: 0, opacity: 1 }, 0)
+        particles.to(
+          bubble,
+          {
+            duration: speed,
+            opacity: 0.8,
+            scale: randomNumber(1, 5),
+            y: endY,
+            x: randomNumber(-300, 300),
+            repeatDelay: Math.random() * 2,
+            repeat: -1
+          },
+          Math.random() * 2
+        )
+      })
     }
-  },
-  mounted() {
-    // 开发基于390px宽度调试，其他等比例缩放
-    const scale = 390 / window.innerWidth
-    document.querySelector('.content').style.transform = `scale(${scale})`
   }
 }
 </script>
@@ -58,7 +114,8 @@ export default {
 <style lang="scss" scoped>
 #toothpaste {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
   position: absolute;
   background-image: url('../../assets/toothpaste/背景.png');
   background-size: 100% 100%;
@@ -66,57 +123,71 @@ export default {
   display: grid;
   place-items: center;
   user-select: none;
+
   img {
     display: block;
     margin: 0 auto;
     width: 100%;
   }
+
   .content {
     position: relative;
     width: 100%;
     box-sizing: border-box;
+
     .title {
       margin-bottom: 13%;
     }
+
     .t-body {
       position: relative;
     }
+
     .small-hands {
       width: 25%;
       position: absolute;
       top: 50%;
       right: 28%;
       pointer-events: none;
+
       img {
         position: absolute;
       }
+
       .hands {
         left: 43%;
         top: 1em;
         animation: hands 1s infinite;
       }
+
       // 手指想要点击的动画
       @keyframes hands {
         0% {
           transform: translateX(0);
         }
+
         50% {
           transform: translateX(0.5em);
         }
+
         100% {
           transform: translateX(0);
         }
       }
+
       .click {
         animation: click 1s infinite;
       }
+
       @keyframes click {
         0% {
           transform: scale(0.5);
         }
+
         50% {
           transform: scale(0.8);
         }
+
         100% {
           transform: scale(0.5);
         }
@@ -124,13 +195,45 @@ export default {
     }
   }
 }
+
 .pin-jie-body {
   position: absolute;
   pointer-events: none;
   opacity: 0;
+
   img {
     position: relative;
     z-index: 5;
+  }
+}
+.bubble-box {
+  --smallSize: 20px;
+  --mediumSize: 30px;
+  --largeSize: 40px;
+  position: relative;
+  width: 10%;
+  margin: 0 auto;
+  pointer-events: none;
+
+  .bubble {
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0;
+  }
+  .smallBubble {
+    width: var(--smallSize);
+    height: var(--smallSize);
+    left: calc(50% - var(--smallSize) / 2);
+  }
+  .mediumBubble {
+    width: var(--mediumSize);
+    height: var(--mediumSize);
+    left: calc(50% - var(--mediumSize) / 2);
+  }
+  .largeBubble {
+    width: var(--largeSize);
+    height: var(--largeSize);
+    left: calc(50% - var(--largeSize) / 2);
   }
 }
 </style>

@@ -9,3 +9,7 @@ export function toJsencrypt(data) {
     encrypt.setPublicKey(publicKey)
     return encrypt.encrypt(JSON.stringify(data))
 }
+// 获取一个随机数
+export function randomNumber(min, max) {
+    return Math.floor(Math.random() * (1 + max - min) + min);
+}
