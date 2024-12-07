@@ -9,6 +9,7 @@ function resolve(dir) {
 module.exports = {
   assetsDir: 'static',
   productionSourceMap: false,
+  publicPath: '/CNY/',
   css: {
     extract: false
   },
