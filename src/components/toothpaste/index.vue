@@ -1,7 +1,7 @@
 <template>
   <div id="toothpaste">
     <div class="content">
-      <img style="width: 90%" class="title" src="@/assets/toothpaste/好运文字.png" alt="" />
+      <img style="width: 80%" class="title" src="@/assets/toothpaste/好运文字.png" alt="" />
       <div class="t-body">
         <div class="pin-jie-body">
           <img style="width: 40%" src="@/assets/toothpaste/牙膏身体.png" alt="" />
@@ -9,7 +9,7 @@
           <img class="gai-zi" style="width: 24%; margin-top: -7%; left: -3px" src="@/assets/toothpaste/盖子.png" alt="" />
           <img style="width: 0.8%; margin-top: -14.5%; right: -47px" src="@/assets/toothpaste/衔接.png" alt="" />
         </div>
-        <img class="zheng-ge" style="width: 40%;" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
+        <img class="zheng-ge" style="width: 35%" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
         <div class="small-hands">
           <img class="click" src="@/assets/toothpaste/点击光效.png" alt="" />
           <img class="hands" src="@/assets/toothpaste/点击小手.png" alt="" />
@@ -46,6 +46,11 @@ export default {
       // 打开盖子
       tl.to('.gai-zi', { rotate: -120, duration: 0.5, transformOrigin: '100% 0%' })
     }
+  },
+  mounted() {
+    // 开发基于390px宽度调试，其他等比例缩放
+    const scale = 390 / window.innerWidth
+    document.querySelector('.content').style.transform = `scale(${scale})`
   }
 }
 </script>
