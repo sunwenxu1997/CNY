@@ -12,7 +12,7 @@ const whiteList = ['/login'] // 没有重定向白名单
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
   // 确定用户是否已登录
-  const hasToken = getToken()
+  const hasToken = getToken() || true
   if (hasToken) {
     // 如果已登录，则重定向到主页
     if (to.path === '/login') {

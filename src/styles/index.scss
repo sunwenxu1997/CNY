@@ -1,5 +1,4 @@
 @import './vant-ui.scss';
-
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -20,6 +19,7 @@ html {
 #app {
   height: 100%;
   overflow-y: auto;
+  position: relative;
 }
 
 *,
