@@ -3,7 +3,17 @@
     <div class="content">
       <img style="width: 90%" class="title" src="@/assets/toothpaste/好运文字.png" alt="" />
       <div class="t-body">
-        <img style="width: 40%" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
+        <div class="pin-jie-body">
+          <img style="width: 40%" src="@/assets/toothpaste/牙膏身体.png" alt="" />
+          <img style="width: 11%; margin-top: -3%; z-index: 2" src="@/assets/toothpaste/牙膏头.png" alt="" />
+          <img
+            class="gai-zi"
+            style="width: 24%; margin-top: -8%; left: -3px"
+            src="@/assets/toothpaste/盖子.png"
+            alt=""
+          />
+        </div>
+        <img style="width: 40%;" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
         <div class="small-hands">
           <img class="click" src="@/assets/toothpaste/点击光效.png" alt="" />
           <img class="hands" src="@/assets/toothpaste/点击小手.png" alt="" />
@@ -18,6 +28,11 @@
 // 引入gsap
 import { gsap } from 'gsap'
 export default {
+  data() {
+    return {
+      getReadyToSqueeze: false
+    }
+  },
   methods: {
     clickBody() {
       // 隐藏其他文字
@@ -25,10 +40,16 @@ export default {
       // 隐藏好运文字
       gsap.to('.hao-yun', { opacity: 0, duration: 0.5 })
       // 隐藏点击光效
-      gsap.to('.small-hands', { opacity: 0, duration: 0.5 })
+      gsap.to(['.small-hands', '.pin-jie-body'], { opacity: 0, duration: 0.5 })
 
       // 点击牙膏，通过gsap.timeline控制牙膏上移
-      gsap.timeline().to('.t-body img', { y: '-74%', duration: 0.5 })
+      gsap.timeline().to('.t-body img', {
+        y: '-33vh',
+        duration: 0.5,
+        onComplete: () => {
+          this.getReadyToSqueeze = true
+        }
+      })
     }
   }
 }
@@ -53,6 +74,7 @@ export default {
   .content {
     position: relative;
     width: 100%;
+    box-sizing: border-box;
     .title {
       margin-bottom: 13%;
     }
@@ -100,6 +122,14 @@ export default {
         }
       }
     }
+  }
+}
+.pin-jie-body {
+  position: absolute;
+  pointer-events: none;
+  img {
+    position: relative;
+    z-index: 5;
   }
 }
 </style>
