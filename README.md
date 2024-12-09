@@ -1,4 +1,3 @@
-# opple-odata-mobile
 这是一个移动端基于vant组件搭建的vue2项目。
 ## 注意事项
 * 开发阶段建议大家提前在 `vscode`中安装 `Prettier-Code formatter`保证代码格式化时的一致性；

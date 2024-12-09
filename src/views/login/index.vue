@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-content">
       <div class="logo">
-        <img src="@/assets/logo.png" alt="" />
+        <!-- <img src="@/assets/logo.png" alt="" /> -->
       </div>
       <van-form @submit="toLogin">
         <van-cell-group>
