@@ -57,7 +57,7 @@ export default {
       isAllShow: true, // 是否显示整个牙膏动画,用于后期销毁动画
       progressValue: 0,
       progressTimeCount: 10,
-      dotNum: 50,
+      dotNum: 200,
       dotList: [],
       elements: ['锦鲤元素.png', '桃花元素.png', '元宝元素.png'],
       clickTimer: null,
@@ -140,7 +140,7 @@ export default {
         gsap.to(element, { repeat: -1, duration: 5, rotate: 360, repeatDelay: Math.random() * 5 })
         const particles = gsap.timeline({})
         // timeScale 控制动画速度
-        gsap.to(particles, { timeScale: 1 })
+        gsap.to(particles, { timeScale: 0.5 })
         particles.set(bubble, { y: startY, x: 0, scale: 0.5, duration: 0, opacity: 1 }, 0)
         particles.to(
           bubble,
