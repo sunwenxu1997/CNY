@@ -1,10 +1,14 @@
 @import './vant-ui.scss';
+
+@font-face {
+  font-family: 'MEllanPRC-Xbold'; // 为字体定义一个名称
+  src: url('../assets//fonts/MEllanPRC-Xbold.OTF') format('opentype'); // 字体文件的路径和格式
+}
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
 
 label {

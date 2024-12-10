@@ -14,13 +14,28 @@
             </div>
           </div>
         </div>
-        <img class="zheng-ge" style="width: 40%" @click="clickBody" src="@/assets/toothpaste/整个牙膏.png" alt="" />
+        <img class="zheng-ge" style="width: 40%" @click="checkoutClick" src="@/assets/toothpaste/整个牙膏.png" alt="" />
         <div class="small-hands">
           <img class="click" src="@/assets/toothpaste/点击光效.png" alt="" />
           <img class="hands" src="@/assets/toothpaste/点击小手.png" alt="" />
         </div>
       </div>
       <img style="width: 90%; margin-top: 5%" class="hao-yun" src="@/assets/toothpaste/狂点牙膏释放好运.png" alt="" />
+    </div>
+    <div class="progress">
+      <div>
+        <div class="progress-title">
+          <span style="top: 5px; letter-spacing: -0.5rem">{{ progressTimeCount }}</span>
+          <span style="font-size: 3rem; margin-left: 1rem">秒</span>
+        </div>
+        <img style="transform: scale(1.2); margin-bottom: 15px; margin-top: -1.5rem" src="@/assets/toothpaste/倒计时.png" alt="" />
+      </div>
+      <div class="box">
+        <div class="frame"></div>
+        <div class="value">
+          <span style="margin-right: 5px">{{ progressValue }}%</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -29,21 +44,41 @@
 // 引入gsap
 import { gsap } from 'gsap'
 import { randomNumber } from '@/utils'
+import { set } from 'vue'
 export default {
   data() {
     return {
-      getReadyToSqueeze: false,
+      progressValue: 0,
+      progressTimeCount: 10,
       dotNum: 50,
       dotList: [],
-      elements: ['锦鲤元素.png', '桃花元素.png', '元宝元素.png']
+      elements: ['锦鲤元素.png', '桃花元素.png', '元宝元素.png'],
+      clickTimer: null,
+      clickCount: 0,
+      minClickCount: 10 // 最少点击次数，点击次数大于等于这个值才会触发
     }
   },
   mounted() {
-    // 开发基于390px宽度调试，其他等比例缩放
-    const scale = 390 / window.innerWidth
-    document.querySelector('.content').style.transform = `scale(${scale})`
+    // this.$nextTick(() => {
+    //   this.playProgress()
+    // })
   },
   methods: {
+    // 检验用户连续点击次数是否大于等于minClickCount
+    checkoutClick() {
+      this.clickTimer && clearInterval(this.clickTimer)
+      this.clickCount++
+      // 如果用户在1秒内没有连续点击minClickCount次，点击次数持续递减
+      // 创建一个定时器，每秒减少一次点击次数
+      this.clickTimer = setInterval(() => {
+        if (this.clickCount > 0) this.clickCount--
+      }, 500)
+      if (this.clickCount >= this.minClickCount) {
+        clearInterval(this.clickTimer)
+        this.clickCount = 0
+        this.clickBody()
+      }
+    },
     clickBody() {
       this.initBubble()
       // 隐藏其他文字
@@ -65,6 +100,13 @@ export default {
         transformOrigin: '100% 0%',
         onComplete: () => {
           this.playBubble()
+          gsap.to('.progress', {
+            opacity: 1,
+            duration: 1,
+            onComplete: () => {
+              this.playProgress()
+            }
+          })
         }
       })
     },
@@ -78,6 +120,7 @@ export default {
         this.dotList.push({ size: `${size}Bubble`, url, speed })
       }
     },
+    // 播放吐出的泡泡
     playBubble() {
       console.log(this.dotList)
       const startY = 0,
@@ -106,12 +149,39 @@ export default {
           Math.random() * 2
         )
       })
+    },
+    playProgress() {
+      // 通过gsap控制progressValue进度条 随机增加进度 10秒内增加到100%后停止
+      const _this = this
+      const proxy = { value: 0 }
+      gsap.to(proxy, {
+        duration: _this.progressTimeCount,
+        value: 100,
+        onUpdate: () => {
+          // 向上取整，会改变原始传入值
+          _this.progressValue = Math.ceil(proxy.value)
+          gsap.to('.value', { width: `${_this.progressValue}%`, duration: 0.3 })
+        }
+      })
+
+      // 实现倒计时
+      this.progressTimeCount--
+      const timer = setInterval(() => {
+        this.progressTimeCount--
+        if (this.progressTimeCount <= 0) {
+          clearInterval(timer)
+          this.progressTimeCount = 0
+        }
+      }, 1000)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+* {
+  font-family: 'MEllanPRC-Xbold';
+}
 #toothpaste {
   width: 100%;
   height: 100vh;
@@ -195,7 +265,9 @@ export default {
     }
   }
 }
-
+.zheng-ge:active {
+  transform: scale(0.98);
+}
 .pin-jie-body {
   position: absolute;
   pointer-events: none;
@@ -234,6 +306,48 @@ export default {
     width: var(--largeSize);
     height: var(--largeSize);
     left: calc(50% - var(--largeSize) / 2);
+  }
+}
+.progress {
+  width: 70%;
+  position: absolute;
+  bottom: 5%;
+  left: 15%;
+  opacity: 0;
+  .box {
+    height: 20px;
+    position: relative;
+  }
+  .box .frame {
+    width: 103%;
+    height: 100%;
+    background-image: url('../../assets/toothpaste/进度框.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: -1.5%;
+  }
+  .box .value {
+    width: 0%;
+    height: 60%;
+    position: absolute;
+    border-radius: 5px;
+    background-image: url('../../assets/toothpaste/读取进度.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    font-size: 0.65rem;
+    color: #6b3000;
+    text-align: right;
+    top: 20%;
+  }
+  .progress-title {
+    font-size: 5rem;
+    color: #fffadc;
+    text-shadow: 0 0 5px #f9e9a4;
+    text-align: center;
+    span {
+      position: relative;
+    }
   }
 }
 </style>
