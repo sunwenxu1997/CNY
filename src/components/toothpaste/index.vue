@@ -1,20 +1,24 @@
 <template>
-  <div id="toothpaste">
+  <div id="toothpaste" v-if="isAllShow">
     <div class="content">
       <img style="width: 80%" class="title" src="@/assets/toothpaste/好运文字.png" alt="" />
       <div class="t-body">
+        <!-- 拼接的牙膏，用于开盖 -->
         <div class="pin-jie-body">
           <img style="width: 40%" src="@/assets/toothpaste/牙膏身体.png" alt="" />
           <img style="width: 11%; margin-top: -3%; z-index: 2" src="@/assets/toothpaste/牙膏头.png" alt="" />
           <img class="gai-zi" style="width: 24%; margin-top: -7%; left: -6px" src="@/assets/toothpaste/盖子.png" alt="" />
           <img style="width: 0.8%; margin-top: -14.5%; right: -44px" src="@/assets/toothpaste/衔接.png" alt="" />
+          <!-- 喷射素材 -->
           <div class="bubble-box">
             <div :class="`bubble ${item.size}`" v-for="(item, index) in dotList" :key="index">
               <img :src="item.url" alt="" />
             </div>
           </div>
         </div>
+        <!-- 整个牙膏，用于点击 -->
         <img class="zheng-ge" style="width: 40%" @click="checkoutClick" src="@/assets/toothpaste/整个牙膏.png" alt="" />
+        <!-- 点击小手 -->
         <div class="small-hands">
           <img class="click" src="@/assets/toothpaste/点击光效.png" alt="" />
           <img class="hands" src="@/assets/toothpaste/点击小手.png" alt="" />
@@ -22,6 +26,7 @@
       </div>
       <img style="width: 90%; margin-top: 5%" class="hao-yun" src="@/assets/toothpaste/狂点牙膏释放好运.png" alt="" />
     </div>
+    <!-- 牙膏喷射，进度条 -->
     <div class="progress">
       <div>
         <div class="progress-title">
@@ -41,13 +46,15 @@
 </template>
 
 <script>
+// 牙膏动画组件
 // 引入gsap
 import { gsap } from 'gsap'
 import { randomNumber } from '@/utils'
-import { set } from 'vue'
 export default {
+  name: 'Toothpaste',
   data() {
     return {
+      isAllShow: true, // 是否显示整个牙膏动画,用于后期销毁动画
       progressValue: 0,
       progressTimeCount: 10,
       dotNum: 50,
@@ -122,9 +129,9 @@ export default {
     },
     // 播放吐出的泡泡
     playBubble() {
-      console.log(this.dotList)
+      // console.log(this.dotList)
       const startY = 0,
-        endY = 700
+        endY = 1000
 
       this.dotList.forEach((item, i) => {
         const { speed } = item
@@ -142,7 +149,7 @@ export default {
             opacity: 0.8,
             scale: randomNumber(1, 5),
             y: endY,
-            x: randomNumber(-300, 300),
+            x: randomNumber(-500, 500),
             repeatDelay: Math.random() * 2,
             repeat: -1
           },
@@ -161,16 +168,30 @@ export default {
           // 向上取整，会改变原始传入值
           _this.progressValue = Math.ceil(proxy.value)
           gsap.to('.value', { width: `${_this.progressValue}%`, duration: 0.3 })
+        },
+        onComplete: () => {
+          // 隐藏进度条
+          gsap.to('.progress', { opacity: 0, duration: 0.5 })
+          // 整体牙膏动画结束，统一上移，渐变消失
+          gsap.to('#toothpaste', {
+            y: '-100vh',
+            duration: 0.5,
+            opacity: 0,
+            onComplete: () => {
+              // 执行完成后，销毁所有牙膏动画 包括泡泡
+              _this.isAllShow = false
+              // 整体牙膏动画结束，返回完成方法
+              _this.$emit('complete')
+            }
+          })
         }
       })
 
       // 实现倒计时
-      this.progressTimeCount--
       const timer = setInterval(() => {
         this.progressTimeCount--
-        if (this.progressTimeCount <= 0) {
+        if (this.progressTimeCount <= 1) {
           clearInterval(timer)
-          this.progressTimeCount = 0
         }
       }, 1000)
     }
@@ -185,11 +206,7 @@ export default {
 #toothpaste {
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   position: absolute;
-  background-image: url('../../assets/toothpaste/背景.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
   display: grid;
   place-items: center;
   user-select: none;
