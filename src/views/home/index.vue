@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      step: 1
+      step: 2
     }
   },
   methods: {
@@ -26,6 +26,7 @@ export default {
     },
     onGetMaterialComplete() {
       console.log('onGetMaterialComplete')
+      this.step = 1
     }
   }
 }

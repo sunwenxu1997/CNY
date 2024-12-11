@@ -49,6 +49,7 @@ export default {
 
     gsap.from('#material', { duration: 0.5, opacity: 0, y: '100vh' })
     this.playElements()
+    this.getPrize()
   },
   methods: {
     // 创建素材背景元素，漩涡状动画
@@ -59,7 +60,6 @@ export default {
         const url = require(`../../assets/${this.elements[sizeIndex]}`)
         this.elementsList.push({ url })
       }
-      this.getPrize()
     },
     // 播放元素动画
     playElements() {
@@ -76,17 +76,19 @@ export default {
           repeatRefresh: true
         })
       })
-      // 光环按照步骤依次转动
-      gsap.to('.guang-huan', { rotate: 360, duration: 3, ease: 'steps(10)', repeat: -1 })
-      setTimeout(() => {
-        gsap.to(['.prize-item', '.prize-lable', '.prize-hint'], { duration: 1, opacity: 1, scale: 1, ease: 'elastic.out(1,0.3)' })
-      }, 1000)
     },
     // 获取奖品
     getPrize() {
       // 随机获得一个奖品
       const index = gsap.utils.random(0, 2, 1)
       this.prizeItem = this.prizeList[index]
+      // 光环按照步骤依次转动
+      gsap.to('.guang-huan', { rotate: 360, duration: 3, ease: 'steps(10)', repeat: -1 })
+      gsap.to(['.prize-item', '.prize-lable', '.prize-hint'], { duration: 1, opacity: 1, scale: 1, ease: 'elastic.out(1,0.3)', delay: 0.5 })
+      // 延迟后开奖
+      setTimeout(() => {
+        this.$emit('complete')
+      }, 3000)
     }
   }
 }
