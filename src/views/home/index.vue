@@ -2,21 +2,24 @@
   <div class="home">
     <Toothpaste v-if="step == 1" @complete="onToothpasteComplete" />
     <GetMaterial v-if="step == 2" @complete="onGetMaterialComplete" />
+    <Bamboo v-if="step == 3" @complete="onBambooComplate" />
   </div>
 </template>
 
 <script>
-import Toothpaste from '@/components/Toothpaste/index.vue'
-import GetMaterial from '@/components/GetMaterial/index.vue'
+import Toothpaste from '@/components/Toothpastes/index.vue';
+import GetMaterial from '@/components/GetMaterial/index.vue';
+import Bamboo from "@/components/Bamboo/index.vue";
 export default {
   name: 'Home',
   components: {
     Toothpaste,
-    GetMaterial
+    GetMaterial,
+    Bamboo
   },
   data() {
     return {
-      step: 2
+      step: 1
     }
   },
   methods: {
@@ -26,7 +29,11 @@ export default {
     },
     onGetMaterialComplete() {
       console.log('onGetMaterialComplete')
-      this.step = 1
+      this.step = 3
+    },
+    onBambooComplate() {
+      console.log('onBambooComplate')
+      // this.step = 1
     }
   }
 }

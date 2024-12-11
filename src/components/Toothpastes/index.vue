@@ -66,9 +66,6 @@ export default {
     }
   },
   mounted() {
-    // this.$nextTick(() => {
-    //   this.playProgress()
-    // })
   },
   methods: {
     // 检验用户连续点击次数是否大于等于minClickCount
