@@ -1,15 +1,15 @@
 <template>
   <div class="home">
     <Toothpaste v-if="step == 1" @complete="onToothpasteComplete" />
-    <GetMaterial v-if="step == 2" @complete="onGetMaterialComplete" />
+    <GetMaterial v-if="[2, 3].includes(step)" @complete="onGetMaterialComplete" />
     <Bamboo v-if="step == 3" @complete="onBambooComplate" />
   </div>
 </template>
 
 <script>
-import Toothpaste from '@/components/Toothpastes/index.vue';
-import GetMaterial from '@/components/GetMaterial/index.vue';
-import Bamboo from "@/components/Bamboo/index.vue";
+import Toothpaste from '@/components/Toothpastes/index.vue'
+import GetMaterial from '@/components/GetMaterial/index.vue'
+import Bamboo from '@/components/Bamboo/index.vue'
 export default {
   name: 'Home',
   components: {

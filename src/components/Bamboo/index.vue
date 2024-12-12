@@ -1,21 +1,12 @@
 <template>
   <div id="Bamboo">
+    <img class="bamboo-title" src="@/assets/bamboo/好运加载中.png" alt="" />
     <div class="bamboo-box">
       <div class="b-body">
         <img src="@/assets/bamboo/桶顶.png" alt="" />
         <img class="shen" src="@/assets/bamboo/桶身.png" alt="" />
       </div>
-      <div class="b-zhuqian">
-        <!-- <img src="@/assets/bamboo/桃花.png" alt="" />
-        <img src="@/assets/bamboo/锦鲤.png" alt="" />
-        <img src="@/assets/bamboo/元宝.png" alt="" />
-        <img src="@/assets/bamboo/桃花.png" alt="" />
-        <img src="@/assets/bamboo/锦鲤.png" alt="" />
-        <img src="@/assets/bamboo/元宝.png" alt="" />
-        <img src="@/assets/bamboo/桃花.png" alt="" />
-        <img src="@/assets/bamboo/锦鲤.png" alt="" />
-        <img src="@/assets/bamboo/元宝.png" alt="" /> -->
-      </div>
+      <div class="b-zhuqian"></div>
     </div>
   </div>
 </template>
@@ -30,6 +21,13 @@ export default {
   },
   mounted() {
     this.initZhuqian()
+    gsap.from('#Bamboo', {
+      duration: 1,
+      opacity: 0,
+      onComplete: () => {
+        this.play()
+      }
+    })
   },
   methods: {
     // 初始化随机竹签
@@ -43,11 +41,57 @@ export default {
           width: '20%',
           position: 'absolute',
           transformOrigin: '50% 100%',
-          x: gsap.utils.random(-20, 20, 10),
-          y: gsap.utils.random(-120, -50, 10),
-          rotation: gsap.utils.random(-20, 20)
+          left: gsap.utils.random(80, 100, 20),
+          top: gsap.utils.random(-100, -50, 10),
+          rotation: gsap.utils.random(-20, 20),
+          y: 0
         })
         zhuqian.appendChild(img)
+      }
+    },
+    play() {
+      const tl = gsap.timeline({ defaults: { duration: 1, ease: 'elastic' } })
+      tl.to('.bamboo-box', { rotate: -5 })
+      tl.to(
+        '.bamboo-box',
+        {
+          y: 40,
+          repeat: 2,
+          duration: 1,
+          repeatDelay: -0.5,
+          ease: 'elastic',
+          onStart: () => {
+            playZhuQian()
+          }
+        },
+        '<'
+      )
+      tl.to('.bamboo-box', { y: 0, rotate: 5 })
+      tl.to(
+        '.bamboo-box',
+        {
+          y: 40,
+          repeat: 2,
+          duration: 1,
+          repeatDelay: -0.5,
+          ease: 'elastic',
+          onStart: () => {
+            playZhuQian()
+          }
+        },
+        '>-0.5'
+      )
+      tl.to('.bamboo-box', { y: 0, rotate: 0 })
+      function playZhuQian() {
+        gsap.utils.toArray('.b-zhuqian img').forEach((item) => {
+          gsap.from(item, {
+            y: gsap.utils.random(-30, -20, 10),
+            duration: 1,
+            repeat: 2,
+            repeatDelay: -0.5,
+            ease: 'elastic'
+          })
+        })
       }
     }
   }
@@ -62,6 +106,13 @@ export default {
   background: rgba(0, 0, 0, 0.523);
   display: grid;
   place-content: center;
+  backdrop-filter: blur(8px);
+}
+.bamboo-title {
+  width: 50vw;
+  position: absolute;
+  top: 10%;
+  left: calc(50% - 25vw);
 }
 .bamboo-box {
   width: 50vw;

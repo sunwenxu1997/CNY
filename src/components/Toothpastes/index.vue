@@ -147,6 +147,7 @@ export default {
             scale: randomNumber(1, 5),
             y: endY,
             x: randomNumber(-500, 500),
+            rotate: randomNumber(-360, 360),
             repeatDelay: Math.random() * 2,
             repeat: -1
           },
