@@ -2,7 +2,12 @@
 
 @font-face {
   font-family: 'MEllanPRC-Xbold'; // 为字体定义一个名称
-  src: url('../assets//fonts/MEllanPRC-Xbold.OTF') format('opentype'); // 字体文件的路径和格式
+  // 字体文件的路径和格式
+  src: url('../assets/fonts/MEllanPRC-Xbold.OTF') format('opentype'), 
+    url('../assets/fonts/MEllanPRC-Xbold-Roman.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/MEllanPRC-Xbold-Roman.woff2') format('woff2'),
+    url('../assets/fonts/MEllanPRC-Xbold-Roman.woff') format('woff');
+  font-display: swap;
 }
 body {
   height: 100%;
