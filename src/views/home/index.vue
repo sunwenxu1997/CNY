@@ -38,6 +38,7 @@
 <script>
 import { getLotteryCount } from '@/api/user'
 import { gsap } from 'gsap'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   components: {},
@@ -55,14 +56,18 @@ export default {
       countDown: 3
     }
   },
+  computed: {
+    ...mapGetters(['memberId'])
+  },
   mounted() {
-    // this.getLotteryCount()
+    this.getLotteryCount()
   },
   methods: {
     // 获取用户可抽奖次数
     getLotteryCount() {
-      getLotteryCount().then((res) => {
-        console.log(res)
+      getLotteryCount({
+        memberId: this.memberId
+      }).then((res) => {
         this.lotteryCount = res.data
       })
     },

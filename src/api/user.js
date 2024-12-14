@@ -17,10 +17,11 @@ export function getInfo() {
 }
 
 // 用户抽奖次数查询
-export function getLotteryCount() {
+export function getLotteryCount(data) {
   return request({
     url: '/mkt/activity/count',
-    method: 'get'
+    method: 'get',
+    params: data
   })
 }
 
@@ -73,5 +74,14 @@ export function getAddressById(data) {
     url: '/mktAwardAddress/detail',
     method: 'get',
     params: data
+  })
+}
+
+// 通过 openId 查询会员信息
+export function getMemberInfo(data) {
+  return request({
+    url: '/api/v1/app/chief/getMemberInfo',
+    method: 'POST',
+    data
   })
 }

@@ -10,9 +10,7 @@ export default {
   computed: {
     // 通过遍历路由表，获取需要缓存的页面，meta.keepAlive:true
     keepAliveList() {
-      return this.$router.options.routes
-        .filter((route) => route.meta && route.meta.keepAlive)
-        .map((route) => route.name)
+      return this.$router.options.routes.filter((route) => route.meta && route.meta.keepAlive).map((route) => route.name)
     }
   }
 }
