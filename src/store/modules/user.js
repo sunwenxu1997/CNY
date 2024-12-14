@@ -1,8 +1,7 @@
-import { login, getInfo, getMemberInfo } from '@/api/user'
+import { getMemberInfo } from '@/api/user'
 import { removeToken } from '@/utils/auth'
-import { toJsencrypt } from '@/utils'
 import { resetRouter } from '@/router'
-import { initWxConfig } from '@/utils/wx'
+import { Toast } from 'vant'
 
 const getDefaultState = () => {
   return {
@@ -46,18 +45,6 @@ const actions = {
   //         })
   //     })
   //   },
-  // 微信鉴权
-  wxAuth({ commit }) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const url = encodeURIComponent(window.location.href)
-        const data = await initWxConfig(url)
-        resolve(data)
-      } catch (error) {
-        reject(error)
-      }
-    })
-  },
 
   // get user info
   getInfo({ commit }, openid) {

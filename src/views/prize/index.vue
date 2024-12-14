@@ -38,13 +38,14 @@ export default {
     display: block;
     width: 50%;
     margin: 0 auto;
-    margin-top: 33vh;
+    margin-top: 30vh;
+    margin-bottom: 0.5rem;
   }
 }
 .prize-content {
   width: 90%;
   height: 49%;
-  margin: 0.5rem auto;
+  margin: 0 auto;
   box-sizing: border-box;
   padding: 0.5rem;
   background: #f9e9a4;

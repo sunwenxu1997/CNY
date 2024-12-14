@@ -18,7 +18,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('@/views/home/index.vue'),
-    meta: { title: '首页', keepAlive: true }
+    meta: { title: '好运签', keepAlive: true }
   },
   {
     path: '/login',
@@ -37,6 +37,12 @@ const routes = [
     name: 'Prize',
     component: () => import('@/views/prize/index.vue'),
     meta: { title: '我的奖品' }
+  },
+  {
+    path: '/rule',
+    name: 'Rule',
+    component: () => import('@/views/rule/index.vue'),
+    meta: { title: '活动规则' }
   },
   {
     path: '/404',

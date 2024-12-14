@@ -11,10 +11,19 @@
       </div>
       <div class="col-2">
         <img class="btn" src="@/assets/首页-我的奖品.png" alt="" @click="clickMyPrize" />
-        <img class="btn" src="@/assets/首页-活动规则.png" alt="" />
+        <img class="btn" src="@/assets/首页-活动规则.png" alt="" @click="clickRule" />
       </div>
       <div class="col-3">
-        <img class="btn" style="width: 20%; margin-top: 0.6rem" src="@/assets/首页-中奖公示.png" alt="" />
+        <div style="min-height: 1.5rem">
+          <img
+            v-if="lotteryList.length"
+            class="btn"
+            style="width: 20%; margin-top: 0.6rem"
+            src="@/assets/首页-中奖公示.png"
+            alt=""
+            @click="clickLotteryList"
+          />
+        </div>
         <img style="width: 60%" src="@/assets/首页-活动时间.png" alt="" />
         <img style="width: 90%" src="@/assets/首页-图片供参考.png" alt="" />
       </div>
@@ -32,16 +41,43 @@
         </div>
       </div>
     </div>
+    <van-overlay :lock-scroll="false" z-index="5" :show="showLotteryList" @click="showLotteryList = false">
+      <div class="wrapper" @click.stop>
+        <div class="block">
+          <img class="title" src="@/assets/首页-终极大奖名单.png" alt="" />
+          <img class="close" src="@/assets/关闭小按钮.png" alt="" @click="showLotteryList = false" />
+          <div class="content">
+            <!-- 表格内容 表头 中奖手机号 中奖时间 -->
+            <table>
+              <thead>
+                <tr>
+                  <th>中奖手机号</th>
+                  <th>中奖时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in 20" :key="index">
+                  <td>138****2791</td>
+                  <td>2024-12-08 14:39</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </van-overlay>
+    <ShareActivity ref="share-activity" />
   </div>
 </template>
 
 <script>
-import { getLotteryCount } from '@/api/user'
+import { getLotteryCount, getLotteryList } from '@/api/user'
 import { gsap } from 'gsap'
 import { mapGetters } from 'vuex'
+import ShareActivity from '@/components/ShareActivity'
 export default {
   name: 'Home',
-  components: {},
+  components: { ShareActivity },
   data() {
     return {
       backgroundList: [
@@ -50,7 +86,9 @@ export default {
         { url: require('../../assets/首页-牙膏背景.png') },
         { url: require('../../assets/首页-牙刷背景.png') }
       ],
-      lotteryCount: 1,
+      lotteryCount: 0,
+      lotteryList: [1],
+      showLotteryList: false,
       showCover: false,
       // 倒计时
       countDown: 3
@@ -59,13 +97,15 @@ export default {
   computed: {
     ...mapGetters(['memberId'])
   },
-  async created() {
-    // const { openid } = this.$route.query
-    await this.$store.dispatch('user/getInfo', 'oZnBq5doeBJgfpH8MPmngq4wpV70')
-    this.getLotteryCount()
+  created() {
+    this.init()
   },
   mounted() {},
   methods: {
+    async init() {
+      //   this.getLotteryCount()
+      //   this.getLotteryList()
+    },
     // 获取用户可抽奖次数
     getLotteryCount() {
       getLotteryCount({
@@ -78,7 +118,8 @@ export default {
     clickOpenLuck() {
       if (!this.checkUser()) return
       if (this.lotteryCount <= 0) {
-        this.$toast('您的抽奖次数已用完')
+        // this.$toast('您的抽奖次数已用完')
+        this.$refs['share-activity'].show()
         return
       } else {
         this.showCover = true
@@ -111,6 +152,18 @@ export default {
         return false
       }
       return true
+    },
+    clickRule() {
+      this.$router.push('/rule')
+    },
+    // 获取中奖列表
+    getLotteryList() {
+      getLotteryList().then((res) => {
+        this.lotteryList = res.data
+      })
+    },
+    clickLotteryList() {
+      this.showLotteryList = true
     }
   }
 }
@@ -198,6 +251,50 @@ export default {
       position: absolute;
       top: -2rem;
       left: 0;
+    }
+  }
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  .block {
+    width: 78%;
+    position: relative;
+  }
+  img {
+    width: 100%;
+    display: block;
+  }
+  .close {
+    position: absolute;
+    right: -8%;
+    top: -8%;
+    width: 20%;
+    z-index: 5;
+  }
+  .content {
+    position: absolute;
+    width: 76%;
+    height: 70%;
+    top: 20%;
+    left: 12%;
+    color: #fffadc;
+    font-family: 'MEllanPRC-Xbold';
+    font-size: 0.8rem;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    table {
+      width: 100%;
+      thead {
+        font-weight: bold;
+      }
+      th,
+      td {
+        padding: 0.3rem;
+      }
     }
   }
 }
