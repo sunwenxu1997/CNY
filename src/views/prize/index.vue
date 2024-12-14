@@ -1,6 +1,6 @@
 <template>
-  <div class="prize">
-    <img class="prize-background" src="../../assets/prize/底图.png" alt="" />
+  <div class="app-content-100vh">
+    <img class="title" src="@/assets/prize/我的奖品字.png" alt="" />
     <div class="prize-content">
       <div class="prize-list" v-if="prizeList.length > 0">
         <div class="prize-item" v-for="(item, index) in prizeList" :key="index">
@@ -32,28 +32,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.prize {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  .prize-background {
-    width: 100%;
-    height: 100%;
-    // object-fit: cover;
-    position: absolute;
-    top: 0;
+.app-content-100vh {
+  background-image: url('../../assets/prize/底图.png');
+  .title {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 33vh;
   }
 }
 .prize-content {
   width: 90%;
   height: 49%;
-  position: absolute;
-  left: 5%;
-  bottom: 9%;
+  margin: 0.5rem auto;
   box-sizing: border-box;
-  padding: 1rem;
-  // background: yellow;
-  // opacity: 0.5;
+  padding: 0.5rem;
+  background: #f9e9a4;
+  border-radius: 0.5rem;
   .no-prize {
     text-align: center;
     font-size: 0.8rem;

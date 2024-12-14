@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="app-content-100vh">
     <van-swipe class="my-swipe" :autoplay="2500" :show-indicators="false">
       <van-swipe-item v-for="(item, index) in backgroundList" :key="index">
         <img class="background-img" :src="item.url" alt="" />
@@ -59,9 +59,12 @@ export default {
   computed: {
     ...mapGetters(['memberId'])
   },
-  mounted() {
+  async created() {
+    // const { openid } = this.$route.query
+    await this.$store.dispatch('user/getInfo', 'oZnBq5doeBJgfpH8MPmngq4wpV70')
     this.getLotteryCount()
   },
+  mounted() {},
   methods: {
     // 获取用户可抽奖次数
     getLotteryCount() {
@@ -114,11 +117,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
-  width: 100%;
-  height: 100vh;
-  //   overflow: hidden;
-  position: absolute;
+.app-content-100vh {
   .my-swipe {
     width: 100vw;
     height: 100%;

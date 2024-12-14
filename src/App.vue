@@ -12,6 +12,10 @@ export default {
     keepAliveList() {
       return this.$router.options.routes.filter((route) => route.meta && route.meta.keepAlive).map((route) => route.name)
     }
+  },
+  beforeCreate() {
+    console.log('app beforeCreate')
+    this.$store.dispatch('user/wxAuth')
   }
 }
 </script>
