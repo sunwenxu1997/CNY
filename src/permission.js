@@ -30,7 +30,7 @@ router.beforeEach(async (to, from, next) => {
       }
     }
   } else {
-    await store.dispatch('user/wxAuth')
+    store.dispatch('user/wxAuth')
     next()
     NProgress.done()
   }
