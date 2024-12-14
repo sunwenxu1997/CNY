@@ -4,8 +4,7 @@ import { Toast } from 'vant'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
-
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
+NProgress.configure({ showSpinner: false, color: '#cb221c' }) // NProgress Configuration
 
 const whiteList = ['/login'] // 没有重定向白名单
 

@@ -9,6 +9,10 @@
     url('../assets/fonts/MEllanPRC-Xbold-Roman.woff') format('woff');
   font-display: swap;
 }
+
+#nprogress .bar{
+    background: #dc372b !important;
+}
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
