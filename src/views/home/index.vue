@@ -124,7 +124,7 @@ export default {
       if (!this.checkUser()) return
       
       // 每次点击开好运时，获取最新的抽奖次数
-    //   await this.getLotteryCount()
+      await this.getLotteryCount()
 
       if (this.lotteryCount <= 0) {
         this.$refs['share-activity'].show()
