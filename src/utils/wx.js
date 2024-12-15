@@ -16,12 +16,14 @@ export function wxAuth() {
         signature: data.signature,
         jsApiList: [
           'updateAppMessageShareData', // 分享给朋友
-          'updateTimelineShareData' // 分享到朋友圈
+          'updateTimelineShareData', // 分享到朋友圈
+          'onMenuShareAppMessage', // 旧版分享给朋友
+          'onMenuShareTimeline' // 旧版分享到朋友圈
         ]
       })
       resolve()
       wx.checkJsApi({
-        jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData'],
+        jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareAppMessage', 'onMenuShareTimeline'],
         success: function (res) {
           console.log('checkJsApi success', res)
         }

@@ -33,7 +33,15 @@ export default {
     shareToGroup() {
       wx.ready(() => {
         console.log('分享到朋友圈')
-        wx.updateTimelineShareData({
+        // wx.updateTimelineShareData({
+        //   title: '好运签',
+        //   link: 'https://sunwenxu1997.github.io/CNY/#/',
+        //   imgUrl: 'https://sunwenxu1997.github.io/CNY/share.jpg',
+        //   success: function () {
+        //     console.log('分享成功')
+        //   }
+        // })
+        wx.onMenuShareTimeline({
           title: '好运签',
           link: 'https://sunwenxu1997.github.io/CNY/#/',
           imgUrl: 'https://sunwenxu1997.github.io/CNY/share.jpg',
@@ -47,7 +55,15 @@ export default {
     shareToFriend() {
       wx.ready(() => {
         console.log('分享到好友')
-        wx.updateAppMessageShareData({
+        // wx.updateAppMessageShareData({
+        //   title: '好运签',
+        //   link: 'https://sunwenxu1997.github.io/CNY/#/',
+        //   imgUrl: 'https://sunwenxu1997.github.io/CNY/share.jpg',
+        //   success: function () {
+        //     console.log('分享成功')
+        //   }
+        // })
+        wx.onMenuShareAppMessage({
           title: '好运签',
           link: 'https://sunwenxu1997.github.io/CNY/#/',
           imgUrl: 'https://sunwenxu1997.github.io/CNY/share.jpg',
