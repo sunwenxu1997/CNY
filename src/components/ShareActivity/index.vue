@@ -82,7 +82,9 @@ export default {
     },
     // 关注视频号
     followVideo() {
-      console.log('关注视频号')
+      wx.miniProgram.navigateTo({
+        url: 'pages/wxVideo/index'
+      })
     }
   }
 }

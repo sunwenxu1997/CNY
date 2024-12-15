@@ -9,7 +9,7 @@ export function wxAuth() {
       const url = window.location.href
       const { data } = await getJsSDK({ url })
       wx.config({
-        debug: true,
+        debug: false,
         appId: data.appId,
         timestamp: data.timestamp,
         nonceStr: data.nonceStr,
