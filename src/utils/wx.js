@@ -6,7 +6,7 @@ import { getJsSDK } from '@/api/app'
 export function wxAuth() {
   return new Promise(async (resolve, reject) => {
     try {
-      const url = encodeURIComponent(window.location.href)
+      const url = encodeURIComponent(window.location.href.split('#')[0])
       const { data } = await getJsSDK({ url })
       wx.config({
         debug: true,
@@ -15,8 +15,8 @@ export function wxAuth() {
         nonceStr: data.nonceStr,
         signature: data.signature,
         jsApiList: [
-          'onMenuShareTimeline', // 分享到朋友圈
-          'onMenuShareAppMessage' // 分享给朋友
+            'updateAppMessageShareData', // 分享给朋友
+            'updateTimelineShareData', // 分享到朋友圈
         ]
       })
       resolve()
