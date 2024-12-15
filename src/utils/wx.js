@@ -6,7 +6,7 @@ import { getJsSDK } from '@/api/app'
 export function wxAuth() {
   return new Promise(async (resolve, reject) => {
     try {
-      const url = encodeURIComponent(window.location.href.split('#')[0])
+      const url = window.location.href
       const { data } = await getJsSDK({ url })
       wx.config({
         debug: true,
