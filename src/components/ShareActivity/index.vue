@@ -36,7 +36,7 @@ export default {
         wx.updateTimelineShareData({
           title: '好运签',
           link: 'https://sunwenxu1997.github.io/CNY/#/',
-          imgUrl: '',
+          imgUrl: 'https://sunwenxu1997.github.io/CNY/share.jpg',
           success: function () {
             console.log('分享成功')
           }
@@ -50,7 +50,7 @@ export default {
         wx.updateAppMessageShareData({
           title: '好运签',
           link: 'https://sunwenxu1997.github.io/CNY/#/',
-          imgUrl: '',
+          imgUrl: 'https://sunwenxu1997.github.io/CNY/share.jpg',
           success: function () {
             console.log('分享成功')
           }
