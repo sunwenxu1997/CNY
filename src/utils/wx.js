@@ -18,12 +18,13 @@ export function wxAuth() {
           'updateAppMessageShareData', // 分享给朋友
           'updateTimelineShareData', // 分享到朋友圈
           'onMenuShareAppMessage', // 旧版分享给朋友
-          'onMenuShareTimeline' // 旧版分享到朋友圈
+          'onMenuShareTimeline', // 旧版分享到朋友圈
+          'chooseImage' // 选择图片
         ]
       })
       resolve()
       wx.checkJsApi({
-        jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareAppMessage', 'onMenuShareTimeline'],
+        jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareAppMessage', 'onMenuShareTimeline', 'chooseImage'],
         success: function (res) {
           console.log('checkJsApi success', res)
         }
