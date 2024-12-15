@@ -108,17 +108,25 @@ export default {
     },
     // 获取用户可抽奖次数
     getLotteryCount() {
-      getLotteryCount({
-        memberId: this.memberId
-      }).then((res) => {
-        this.lotteryCount = res.data
+      return new Promise((resolve, reject) => {
+        getLotteryCount({ memberId: this.memberId })
+          .then((res) => {
+            this.lotteryCount = res.data
+            resolve(res.data)
+          })
+          .catch((err) => {
+            reject(err)
+          })
       })
     },
     // 点击开好运
-    clickOpenLuck() {
+    async clickOpenLuck() {
       if (!this.checkUser()) return
+      
+      // 每次点击开好运时，获取最新的抽奖次数
+    //   await this.getLotteryCount()
+
       if (this.lotteryCount <= 0) {
-        // this.$toast('您的抽奖次数已用完')
         this.$refs['share-activity'].show()
         return
       } else {
@@ -147,7 +155,7 @@ export default {
     },
     // 检验用户是否注册小程序会员
     checkUser() {
-      if (!true) {
+      if (!this.memberId) {
         this.$toast('请先注册小程序会员')
         return false
       }
