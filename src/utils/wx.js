@@ -15,11 +15,17 @@ export function wxAuth() {
         nonceStr: data.nonceStr,
         signature: data.signature,
         jsApiList: [
-            'updateAppMessageShareData', // 分享给朋友
-            'updateTimelineShareData', // 分享到朋友圈
+          'updateAppMessageShareData', // 分享给朋友
+          'updateTimelineShareData' // 分享到朋友圈
         ]
       })
       resolve()
+      wx.checkJsApi({
+        jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData'],
+        success: function (res) {
+          console.log('checkJsApi success', res)
+        }
+      })
       wx.ready(() => {
         console.log('微信鉴权成功')
       })

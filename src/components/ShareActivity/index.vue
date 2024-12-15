@@ -31,19 +31,32 @@ export default {
     },
     // 分享到群
     shareToGroup() {
-      wx.updateAppMessageShareData({
-        title: '分享到群',
-        desc: '分享到群',
-        link: 'http://www.baidu.com',
-        imgUrl: 'http://www.baidu.com',
-        success: function () {
-          console.log('分享到群成功')
-        }
+      wx.ready(() => {
+        console.log('分享到朋友圈')
+        wx.updateTimelineShareData({
+          title: '分享标题',
+          link: '分享链接',
+          imgUrl: '分享图标',
+          success: function () {
+            console.log('分享成功')
+          }
+        })
       })
     },
     // 分享到好友
     shareToFriend() {
-      console.log('分享到好友')
+      wx.ready(() => {
+        console.log('分享到好友')
+        wx.updateAppMessageShareData({
+          title: '分享标题',
+          desc: '分享描述',
+          link: '分享链接',
+          imgUrl: '分享图标',
+          success: function () {
+            console.log('分享成功')
+          }
+        })
+      })
     },
     // 关注视频号
     followVideo() {
