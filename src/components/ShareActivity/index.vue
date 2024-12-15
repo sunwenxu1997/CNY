@@ -34,9 +34,9 @@ export default {
       wx.ready(() => {
         console.log('分享到朋友圈')
         wx.updateTimelineShareData({
-          title: '分享标题',
-          link: '分享链接',
-          imgUrl: '分享图标',
+          title: '好运签',
+          link: 'https://sunwenxu1997.github.io/CNY/#/',
+          imgUrl: '',
           success: function () {
             console.log('分享成功')
           }
@@ -48,10 +48,9 @@ export default {
       wx.ready(() => {
         console.log('分享到好友')
         wx.updateAppMessageShareData({
-          title: '分享标题',
-          desc: '分享描述',
-          link: '分享链接',
-          imgUrl: '分享图标',
+          title: '好运签',
+          link: 'https://sunwenxu1997.github.io/CNY/#/',
+          imgUrl: '',
           success: function () {
             console.log('分享成功')
           }
