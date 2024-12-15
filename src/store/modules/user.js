@@ -5,6 +5,7 @@ import { Toast } from 'vant'
 
 const getDefaultState = () => {
   return {
+    openid: '',
     memberId: '',
     name: '',
     avatar: ''
@@ -25,6 +26,9 @@ const mutations = {
   },
   SET_MEMBER_ID: (state, memberId) => {
     state.memberId = memberId
+  },
+  SET_OPENID: (state, openid) => {
+    state.openid = openid
   }
 }
 
@@ -55,10 +59,11 @@ const actions = {
           if (!data) {
             return reject('Verification failed, please Login again.')
           }
-          const { nickName, img } = data
+          const { nickName, img, openid } = data
           commit('SET_NAME', nickName)
           commit('SET_AVATAR', img)
           commit('SET_MEMBER_ID', data.id)
+          commit('SET_OPENID', openid)
           resolve(data)
         })
         .catch((error) => {
