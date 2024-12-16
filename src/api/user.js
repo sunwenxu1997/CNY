@@ -59,7 +59,7 @@ export function receivePrize(data) {
   })
 }
 
-// 保存用户领奖地址
+// 用户领奖
 export function saveAddress(data) {
   return request({
     url: '/mktAwardAddress/save',

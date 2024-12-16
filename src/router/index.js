@@ -45,6 +45,12 @@ const routes = [
     meta: { title: '活动规则' }
   },
   {
+    path: '/address',
+    name: 'Address',
+    component: () => import('@/views/address/index.vue'),
+    meta: { title: '填写地址' }
+  },
+  {
     path: '/404',
     component: () => import('@/views/404')
   },

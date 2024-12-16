@@ -1,7 +1,7 @@
 <template>
   <div class="app-content-100vh">
-    <Toothpaste v-if="step == 1" @complete="onToothpasteComplete" />
-    <GetMaterial v-if="[2, 3].includes(step)" @complete="onGetMaterialComplete" />
+    <!-- <Toothpaste v-if="step == 1" @complete="onToothpasteComplete" />
+    <GetMaterial v-if="[2, 3].includes(step)" @complete="onGetMaterialComplete" /> -->
     <Bamboo v-if="step == 3" @complete="onBambooComplate" />
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      step: 1
+      step: 3
     }
   },
   methods: {
