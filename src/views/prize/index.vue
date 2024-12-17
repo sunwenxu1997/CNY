@@ -43,13 +43,13 @@ export default {
     },
     // 领取奖品，和动画执行完领取奖品方法一致
     toReceive(row) {
-      const { awardType, id, awardUrl } = row
+      const { awardType, awardId, awardUrl } = row
       // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
       if (awardType == 4) {
-        this.$router.replace({ name: 'Address', query: { id: id } })
+        this.$router.replace({ name: 'Address', query: { id: awardId } })
       } else {
         // 非实物直接领取
-        receivePrize({ memberId: this.memberId, awardId: id }).then((res) => {
+        receivePrize({ memberId: this.memberId, awardId: awardId }).then((res) => {
           if (awardType == 1) {
             window.location.href =
               'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=NU_nEdwNEVuFfL&check_type=2#wechat_redirect'
