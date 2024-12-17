@@ -11,7 +11,7 @@ const whiteList = ['/login', '/'] // 没有重定向白名单
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
   // 判断当前用户是否存在用户信息
-  const hasGetUserInfo = store.getters.name
+  const hasGetUserInfo = store.getters.memberId
   if (hasGetUserInfo) {
     next()
   } else {

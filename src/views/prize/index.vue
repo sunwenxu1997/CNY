@@ -8,7 +8,7 @@
             <img :src="item.awardUrl" alt="" />
           </div>
           <div class="prize-name">{{ item.awardName }}</div>
-          <div class="prize-btn" v-if="item.received == 1">
+          <div class="prize-btn" v-if="item.received">
             <van-button round type="info" size="small" color="#f6d959" @click="toReceive(item)">点击领取</van-button>
           </div>
           <div class="prize-num" v-else>X{{ item.count }}</div>
