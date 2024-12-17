@@ -82,15 +82,10 @@ export default {
       }
     },
     toReceive() {
-      // 手机封面时，直接根据 awardUrl 下载图片
-      const a = document.createElement('a')
-      a.href = 'https://ocs-dev.opple.com/myx/static/img/logo.40063f1.png'
-      a.download = '123'
-      a.click()
       const { awardType, id, awardUrl } = this.lotteryItem
       // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
       if (awardType == 4) {
-        this.$router.push({ name: 'Address', query: { id: id } })
+        this.$router.replace({ name: 'Address', query: { id: id } })
       } else {
         // 非实物直接领取
         receivePrize({ memberId: this.memberId, awardId: id }).then((res) => {

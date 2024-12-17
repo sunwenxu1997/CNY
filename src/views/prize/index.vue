@@ -9,7 +9,7 @@
           </div>
           <div class="prize-name">{{ item.awardName }}</div>
           <div class="prize-btn" v-if="item.received == 1">
-            <van-button round type="info" size="small" color="#f6d959">点击领取</van-button>
+            <van-button round type="info" size="small" color="#f6d959" @click="toReceive(item)">点击领取</van-button>
           </div>
           <div class="prize-num" v-else>X{{ item.count }}</div>
         </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { getMyLotteryList } from '@/api/user'
+import { getMyLotteryList, receivePrize } from '@/api/user'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -40,6 +40,27 @@ export default {
       getMyLotteryList({ memberId: this.memberId }).then((res) => {
         this.prizeList = res.data
       })
+    },
+    // 领取奖品，和动画执行完领取奖品方法一致
+    toReceive(row) {
+      const { awardType, id, awardUrl } = row
+      // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
+      if (awardType == 4) {
+        this.$router.replace({ name: 'Address', query: { id: id } })
+      } else {
+        // 非实物直接领取
+        receivePrize({ memberId: this.memberId, awardId: id }).then((res) => {
+          if (awardType == 1) {
+            window.location.href =
+              'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=NU_nEdwNEVuFfL&check_type=2#wechat_redirect'
+          } else if (awardType == 2) {
+            window.location.href = awardUrl
+          } else {
+            this.$toast('领取成功')
+            this.$router.replace({ name: 'Home' })
+          }
+        })
+      }
     }
   }
 }
