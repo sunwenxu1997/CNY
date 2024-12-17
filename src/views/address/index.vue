@@ -128,7 +128,7 @@ export default {
     display: block;
     width: 70%;
     margin: 0 auto;
-    margin-top: 30vh;
+    margin-top: 28vh;
     margin-bottom: 0.5rem;
   }
 }

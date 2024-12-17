@@ -65,8 +65,7 @@ export default {
       minClickCount: 10 // 最少点击次数，点击次数大于等于这个值才会触发
     }
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     // 检验用户连续点击次数是否大于等于minClickCount
     checkoutClick() {
@@ -184,7 +183,7 @@ export default {
           })
         }
       })
-
+      this.progressTimeCount--
       // 实现倒计时
       const timer = setInterval(() => {
         this.progressTimeCount--

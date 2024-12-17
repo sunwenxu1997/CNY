@@ -86,9 +86,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     img {
-      width: 100%;
+      height: 3.5rem;
     }
   }
   .prize-name {

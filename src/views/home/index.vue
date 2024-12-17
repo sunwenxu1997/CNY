@@ -135,6 +135,7 @@ export default {
           duration: 0.5,
           opacity: 0,
           onComplete: () => {
+            this.countDown--
             let timer = setInterval(() => {
               this.countDown--
               if (this.countDown <= 0) {
