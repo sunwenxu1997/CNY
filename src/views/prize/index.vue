@@ -46,7 +46,7 @@ export default {
       const { awardType, awardId, awardUrl } = row
       // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
       if (awardType == 4) {
-        this.$router.replace({ name: 'Address', query: { id: awardId } })
+        this.$router.push({ name: 'Address', query: { id: awardId } })
       } else {
         // 非实物直接领取
         receivePrize({ memberId: this.memberId, awardId: awardId }).then((res) => {
