@@ -81,7 +81,13 @@ export default {
         },
         '>-0.5'
       )
-      tl.to('.bamboo-box', { y: 0, rotate: 0 })
+      tl.to('.bamboo-box', {
+        y: 0,
+        rotate: 0,
+        onComplete: () => {
+          this.$emit('complete')
+        }
+      })
       function playZhuQian() {
         gsap.utils.toArray('.b-zhuqian img').forEach((item) => {
           gsap.from(item, {

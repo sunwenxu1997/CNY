@@ -97,15 +97,8 @@ export default {
   computed: {
     ...mapGetters(['memberId'])
   },
-  created() {
-    this.init()
-  },
   mounted() {},
   methods: {
-    async init() {
-      //   this.getLotteryCount()
-      //   this.getLotteryList()
-    },
     // 获取用户可抽奖次数
     getLotteryCount() {
       return new Promise((resolve, reject) => {
@@ -122,7 +115,7 @@ export default {
     // 点击开好运
     async clickOpenLuck() {
       if (!this.checkUser()) return
-      
+
       // 每次点击开好运时，获取最新的抽奖次数
       await this.getLotteryCount()
 

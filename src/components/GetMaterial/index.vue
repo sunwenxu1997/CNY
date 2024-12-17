@@ -19,6 +19,12 @@
 import { gsap } from 'gsap'
 export default {
   name: 'GetMaterial',
+  props: {
+    belongTo: {
+      type: Number,
+      default: 1
+    }
+  },
   data() {
     return {
       elements: ['锦鲤元素.png', '桃花元素.png', '元宝元素.png'],
@@ -26,15 +32,18 @@ export default {
       prizeItem: {},
       prizeList: [
         {
+          belongTo: 3,
           label: require(`../../assets/getMaterial/锦鲤签.png`),
           url: require(`../../assets/getMaterial/锦鲤.png`),
           top: -30
         },
         {
+          belongTo: 1,
           label: require(`../../assets/getMaterial/桃花签.png`),
           url: require(`../../assets/getMaterial/桃花.png`)
         },
         {
+          belongTo: 2,
           label: require(`../../assets/getMaterial/元宝签.png`),
           url: require(`../../assets/getMaterial/元宝.png`)
         }
@@ -67,21 +76,22 @@ export default {
       dotList.forEach((item, index) => {
         const scale = gsap.utils.random(0.3, 5)
         gsap.to(item, {
-          duration: 400 / scale,
+          duration: 0,
           opacity: 1,
-          rotateZ: -1500,
-          scale: scale,
-          delay: gsap.utils.random(-50, 0),
-          repeat: -1,
-          repeatRefresh: true
+          rotateZ: gsap.utils.random(-1500, -100, 100),
+          scale: scale
+          // repeat: -1,
+          // repeatRefresh: true
         })
       })
     },
     // 获取奖品
     getPrize() {
       // 随机获得一个奖品
-      const index = gsap.utils.random(0, 2, 1)
-      this.prizeItem = this.prizeList[index]
+      // const index = gsap.utils.random(0, 2, 1)
+
+      // 根据牙膏动画结束后调用的奖品接口返回的奖品类型，获取对应的奖品
+      this.prizeItem = this.prizeList.find((item) => item.belongTo == this.belongTo)
       // 光环按照步骤依次转动
       gsap.to('.guang-huan', { rotate: 360, duration: 3, ease: 'steps(10)', repeat: -1 })
       gsap.to(['.prize-item', '.prize-lable', '.prize-hint'], { duration: 1, opacity: 1, scale: 1, ease: 'elastic.out(1,0.3)', delay: 0.5 })

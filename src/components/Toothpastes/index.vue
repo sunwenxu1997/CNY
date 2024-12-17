@@ -1,7 +1,7 @@
 <template>
   <div id="toothpaste" v-if="isAllShow">
     <div class="content">
-      <img style="width: 80%" class="title" src="@/assets/toothpaste/好运文字.png" alt="" />
+      <img style="width: 80%" class="content-title" src="@/assets/toothpaste/好运文字.png" alt="" />
       <div class="t-body">
         <!-- 拼接的牙膏，用于开盖 -->
         <div class="pin-jie-body">
@@ -86,7 +86,7 @@ export default {
     clickBody() {
       this.initBubble()
       // 隐藏其他文字
-      gsap.to('.title', { opacity: 0, duration: 0.5 })
+      gsap.to('.content-title', { opacity: 0, duration: 0.5 })
       // 隐藏好运文字
       gsap.to('.hao-yun', { opacity: 0, duration: 0.5 })
       // 隐藏点击光效
@@ -220,7 +220,7 @@ export default {
     width: 100%;
     box-sizing: border-box;
 
-    .title {
+    .content-title {
       margin-bottom: 13%;
     }
 

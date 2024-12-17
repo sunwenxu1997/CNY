@@ -33,7 +33,7 @@
       <img src="@/assets/prize/立即提交@3x.png" alt="" />
     </div>
     <van-popup v-model="showPicker" position="bottom">
-      <van-area title="标题" :area-list="areaList" @confirm="confirmArea" />
+      <van-area :area-list="areaList" @confirm="confirmArea" />
     </van-popup>
   </div>
 </template>
