@@ -40,8 +40,8 @@ export default {
   },
   data() {
     return {
-      step: 4,
-      showLottery: true,
+      step: 1,
+      showLottery: false,
       lotteryItem: {
         id: null,
         awardType: null, // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
