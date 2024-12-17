@@ -4,7 +4,11 @@
     <div class="prize-content">
       <div class="prize-list" v-if="prizeList.length > 0">
         <div class="prize-item" v-for="(item, index) in prizeList" :key="index">
-          <img :src="item.url" alt="" />
+          <div class="prize-img">
+            <img :src="item.awardUrl" alt="" />
+          </div>
+          <div class="prize-name">{{ item.awardName }}</div>
+          <div class="prize-num">x{{ item.count }}</div>
         </div>
       </div>
       <div class="no-prize" v-else>还没有获取奖品哦~</div>
@@ -14,16 +18,23 @@
 
 <script>
 import { getMyLotteryList } from '@/api/user'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       prizeList: []
     }
   },
+  computed: {
+    ...mapGetters(['memberId'])
+  },
+  mounted() {
+    this.getMyLotteryList()
+  },
   methods: {
     // 获取我的奖品列表
     getMyLotteryList() {
-      getMyLotteryList().then((res) => {
+      getMyLotteryList({ memberId: this.memberId }).then((res) => {
         this.prizeList = res.data
       })
     }
@@ -50,11 +61,48 @@ export default {
   padding: 0.5rem;
   background: #f9e9a4;
   border-radius: 0.5rem;
+  overflow-y: auto;
   .no-prize {
     text-align: center;
     font-size: 0.8rem;
     margin-top: 50%;
     color: #5a5a5a;
+  }
+}
+.prize-item {
+  background: #dc372b;
+  border-radius: 1rem;
+  display: flex;
+  color: #f9e9a4;
+  font-family: 'MEllanPRC-Xbold';
+  font-size: 1.5rem;
+  width: 100%;
+  min-height: 5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  .prize-img {
+    width: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    img {
+      width: 100%;
+    }
+  }
+  .prize-name {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+  }
+  .prize-num {
+    max-width: 15%;
+    // background: red;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 }
 </style>

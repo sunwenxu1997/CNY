@@ -17,7 +17,7 @@ router.beforeEach(async (to, from, next) => {
   } else {
     try {
       const { openid } = to.query
-      store.dispatch('user/getInfo', openid || 'oZnBq5doeBJgfpH8MPmngq4wpV70')
+      await store.dispatch('user/getInfo', openid || 'oZnBq5doeBJgfpH8MPmngq4wpV70')
       next()
     } catch (error) {
       Toast(error.msg || '获取用户信息失败,请重新授权')

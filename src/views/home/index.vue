@@ -56,12 +56,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in 20" :key="index">
-                  <td>138****2791</td>
-                  <td>2024-12-08 14:39</td>
+                <tr v-for="(item, index) in lotteryList" :key="index">
+                  <td>{{ item.mobile }}</td>
+                  <td>{{ item.winningTime }}</td>
                 </tr>
               </tbody>
             </table>
+            <p style="text-align: center" v-if="!lotteryList.length">暂时没人中奖~</p>
           </div>
         </div>
       </div>
@@ -87,7 +88,7 @@ export default {
         { url: require('../../assets/首页-牙刷背景.png') }
       ],
       lotteryCount: 0,
-      lotteryList: [1],
+      lotteryList: [],
       showLotteryList: false,
       showCover: false,
       // 倒计时
@@ -98,7 +99,9 @@ export default {
   computed: {
     ...mapGetters(['memberId'])
   },
-  mounted() {},
+  mounted() {
+    this.getLotteryList()
+  },
   methods: {
     // 获取用户可抽奖次数
     getLotteryCount() {
@@ -161,14 +164,21 @@ export default {
     clickRule() {
       this.$router.push('/rule')
     },
-    // 获取中奖列表
     getLotteryList() {
       getLotteryList().then((res) => {
-        this.lotteryList = res.data
+        if (res.data) {
+          this.lotteryList = res.data.list
+        }
       })
     },
+    // 获取中奖列表
     clickLotteryList() {
-      this.showLotteryList = true
+      getLotteryList().then((res) => {
+        if (res.data) {
+          this.lotteryList = res.data.list
+          this.showLotteryList = true
+        }
+      })
     }
   }
 }

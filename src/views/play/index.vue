@@ -3,7 +3,7 @@
     <Toothpaste v-if="step == 1" @complete="onToothpasteComplete" />
     <GetMaterial v-if="[2, 3].includes(step)" @complete="onGetMaterialComplete" :belongTo="lotteryItem.belongTo" />
     <Bamboo v-if="step == 3" @complete="onBambooComplate" />
-    <van-overlay z-index="80" :show="showLottery" @click="showLottery = false">
+    <van-overlay z-index="80" :show="showLottery">
       <div class="wrapper" @click.stop>
         <div class="block">
           <img class="box" src="@/assets/prize/开奖弹窗.png" alt="" />
@@ -81,7 +81,6 @@ export default {
       }
     },
     toReceive() {
-      this.showLottery = false
       const { awardType, id } = this.lotteryItem
       // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
       if (awardType == 4) {
@@ -91,6 +90,7 @@ export default {
         receivePrize({ memberId: this.memberId, awardId: id })
           .then((res) => {
             this.$toast('领取成功')
+            this.$router.replace({ name: 'Home' })
           })
           .catch((err) => {
             this.$router.replace({ name: 'Home' })

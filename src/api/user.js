@@ -43,10 +43,11 @@ export function getLotteryList() {
 }
 
 // 我的中奖记录
-export function getMyLotteryList() {
+export function getMyLotteryList(params) {
   return request({
     url: '/mkt/activity/winningListByMemberId',
-    method: 'get'
+    method: 'get',
+    params
   })
 }
 
@@ -82,6 +83,7 @@ export function getMemberInfo(data) {
   return request({
     url: '/api/v1/app/chief/getMemberInfo',
     method: 'POST',
-    data
+    data,
+    hiddenError: true
   })
 }
