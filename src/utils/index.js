@@ -13,3 +13,28 @@ export function toJsencrypt(data) {
 export function randomNumber(min, max) {
     return Math.floor(Math.random() * (1 + max - min) + min);
 }
+
+// 节流
+export function throttle(fn, delay) {
+    let last = 0;
+    return function () {
+        let now = Date.now();
+        if (now - last > delay) {
+            fn.apply(this, arguments);
+            last = now;
+        }
+    }
+}
+
+// 防抖
+export function debounce(fn, delay) {
+    let timer = null;
+    return function () {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            fn.apply(this, arguments);
+        }, delay);
+    }
+}

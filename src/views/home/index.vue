@@ -91,7 +91,8 @@ export default {
       showLotteryList: false,
       showCover: false,
       // 倒计时
-      countDown: 3
+      countDown: 3,
+      openLuckLoading: false
     }
   },
   computed: {
@@ -114,11 +115,14 @@ export default {
     },
     // 点击开好运
     async clickOpenLuck() {
+      if (this.openLuckLoading) return
+      this.openLuckLoading = true
+
       if (!this.checkUser()) return
 
       // 每次点击开好运时，获取最新的抽奖次数
       await this.getLotteryCount()
-
+      this.openLuckLoading = false
       if (this.lotteryCount <= 0) {
         this.$refs['share-activity'].show()
         return
