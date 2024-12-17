@@ -74,12 +74,13 @@ export default {
     playElements() {
       const dotList = document.querySelectorAll('.dot')
       dotList.forEach((item, index) => {
-        const scale = gsap.utils.random(0.3, 5)
+        const rotateZ = gsap.utils.random(-1500, -100, 100)
         gsap.to(item, {
           duration: 0,
-          opacity: 1,
-          rotateZ: gsap.utils.random(-1500, -100, 100),
-          scale: scale
+          // 旋转度数越大，透明度越高，最大为1
+          opacity: Math.abs(rotateZ) / 1000,
+          rotateZ: rotateZ,
+          scale: gsap.utils.random(0.3, 5)
           // repeat: -1,
           // repeatRefresh: true
         })
@@ -97,6 +98,7 @@ export default {
       gsap.to(['.prize-item', '.prize-lable', '.prize-hint'], { duration: 1, opacity: 1, scale: 1, ease: 'elastic.out(1,0.3)', delay: 0.5 })
       // 延迟后开奖
       setTimeout(() => {
+        gsap.to(['.prize', '.dot'], { duration: 0.5, opacity: 0 })
         this.$emit('complete')
       }, 3000)
     }

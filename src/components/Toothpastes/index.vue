@@ -69,6 +69,8 @@ export default {
   methods: {
     // 检验用户连续点击次数是否大于等于minClickCount
     checkoutClick() {
+      // 进度开始后，不允许再次点击
+      if (this.progressValue > 0) return
       this.clickTimer && clearInterval(this.clickTimer)
       this.clickCount++
       // 如果用户在1秒内没有连续点击minClickCount次，点击次数持续递减
@@ -89,7 +91,8 @@ export default {
       // 隐藏好运文字
       gsap.to('.hao-yun', { opacity: 0, duration: 0.5 })
       // 隐藏点击光效
-      gsap.to('.small-hands', { opacity: 0, duration: 0.5 })
+      gsap.to('.small-hands', { y: '-33vh', opacity: 0, duration: 0.5 })
+      gsap.to('.small-hands', { opacity: 1, duration: 0.5, delay: 1 })
 
       const tl = gsap.timeline()
       // 点击牙膏，通过gsap.timeline控制牙膏上移

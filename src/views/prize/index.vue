@@ -8,7 +8,7 @@
             <img :src="item.awardUrl" alt="" />
           </div>
           <div class="prize-name">{{ item.awardName }}</div>
-          <div class="prize-num">x{{ item.count }}</div>
+          <div class="prize-num">X{{ item.count }}</div>
         </div>
       </div>
       <div class="no-prize" v-else>还没有获取奖品哦~</div>
@@ -70,7 +70,7 @@ export default {
   }
 }
 .prize-item {
-  background: #dc372b;
+  background: #d72316;
   border-radius: 1rem;
   display: flex;
   color: #f9e9a4;
@@ -82,7 +82,7 @@ export default {
   padding: 0.5rem;
   box-sizing: border-box;
   .prize-img {
-    width: 7rem;
+    min-width: 6.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
