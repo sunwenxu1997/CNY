@@ -8,7 +8,10 @@
             <img :src="item.awardUrl" alt="" />
           </div>
           <div class="prize-name">{{ item.awardName }}</div>
-          <div class="prize-num">X{{ item.count }}</div>
+          <div class="prize-btn" v-if="item.received == 1">
+            <van-button round type="info" size="small" color="#f6d959">点击领取</van-button>
+          </div>
+          <div class="prize-num" v-else>X{{ item.count }}</div>
         </div>
       </div>
       <div class="no-prize" v-else>还没有获取奖品哦~</div>
@@ -44,24 +47,27 @@ export default {
 
 <style lang="scss" scoped>
 .app-content-100vh {
+  background-size: 100% !important;
   background-image: url('../../assets/prize/底图.png');
+  background-position: center;
   .title {
     display: block;
     width: 50%;
     margin: 0 auto;
-    margin-top: 30vh;
+    margin-top: 25vh;
     margin-bottom: 0.5rem;
   }
 }
 .prize-content {
   width: 90%;
-  height: 49%;
+  height: 55%;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 0.5rem;
   background: #f9e9a4;
   border-radius: 0.5rem;
   overflow-y: auto;
+  border: 3px solid #ed655b;
   .no-prize {
     text-align: center;
     font-size: 0.8rem;
@@ -75,14 +81,14 @@ export default {
   display: flex;
   color: #f9e9a4;
   font-family: 'MEllanPRC-Xbold';
-  font-size: 1.5rem;
+  font-size: 1rem;
   width: 100%;
   min-height: 5rem;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   box-sizing: border-box;
   .prize-img {
-    min-width: 6.5rem;
+    min-width: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,6 +106,13 @@ export default {
   .prize-num {
     max-width: 15%;
     // background: red;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1.5rem;
+  }
+  .prize-btn {
+    min-width: 5rem;
     display: flex;
     justify-content: flex-end;
     align-items: center;

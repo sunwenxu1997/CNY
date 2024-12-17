@@ -21,17 +21,19 @@ export default {}
 
 <style lang="scss" scoped>
 .app-content-100vh {
+  background-size: 100% !important;
   background-image: url('../../assets/prize/底图.png');
+  background-position: center;
   .title {
     display: block;
     width: 50%;
     margin: 0 auto;
-    margin-top: 30vh;
+    margin-top: 25vh;
     margin-bottom: 0.5rem;
   }
   .content {
     width: 90%;
-    height: 49%;
+    height: 55%;
     box-sizing: border-box;
     margin: 0 auto;
     padding: 0.5rem 1rem;

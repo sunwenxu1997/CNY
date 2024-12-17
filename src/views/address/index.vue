@@ -123,12 +123,14 @@ export default {
 </style>
 <style lang="scss" scoped>
 .app-content-100vh {
+  background-size: 100% !important;
   background-image: url('../../assets/prize/底图.png');
+  background-position: center;
   .title {
     display: block;
     width: 70%;
     margin: 0 auto;
-    margin-top: 28vh;
+    margin-top: 25vh;
     margin-bottom: 0.5rem;
   }
 }

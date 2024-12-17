@@ -19,6 +19,7 @@
             </div>
           </div>
         </div>
+        <img class="wrapper-bottom-text" src="@/assets/shareActivity/再玩一次@2x.png" alt="" />
       </div>
     </van-overlay>
   </div>
@@ -39,8 +40,8 @@ export default {
   },
   data() {
     return {
-      step: 1,
-      showLottery: false,
+      step: 4,
+      showLottery: true,
       lotteryItem: {
         id: null,
         awardType: null, // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
@@ -81,20 +82,28 @@ export default {
       }
     },
     toReceive() {
-      const { awardType, id } = this.lotteryItem
+      // 手机封面时，直接根据 awardUrl 下载图片
+      const a = document.createElement('a')
+      a.href = 'https://ocs-dev.opple.com/myx/static/img/logo.40063f1.png'
+      a.download = '123'
+      a.click()
+      const { awardType, id, awardUrl } = this.lotteryItem
       // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
-      if (true || awardType == 4) {
+      if (awardType == 4) {
         this.$router.push({ name: 'Address', query: { id: id } })
       } else {
         // 非实物直接领取
-        receivePrize({ memberId: this.memberId, awardId: id })
-          .then((res) => {
+        receivePrize({ memberId: this.memberId, awardId: id }).then((res) => {
+          if (awardType == 1) {
+            window.location.href =
+              'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=NU_nEdwNEVuFfL&check_type=2#wechat_redirect'
+          } else if (awardType == 2) {
+            window.location.href = awardUrl
+          } else {
             this.$toast('领取成功')
             this.$router.replace({ name: 'Home' })
-          })
-          .catch((err) => {
-            this.$router.replace({ name: 'Home' })
-          })
+          }
+        })
       }
     },
     // 重新抽奖
@@ -117,6 +126,12 @@ export default {
   justify-content: center;
   width: 100%;
   height: 100%;
+  position: relative;
+  .wrapper-bottom-text {
+    position: absolute;
+    bottom: 5%;
+    width: 75%;
+  }
   .block {
     width: 90%;
     position: relative;
