@@ -118,7 +118,7 @@ export default {
   width: 100%;
   height: 100%;
   .block {
-    width: 78%;
+    width: 90%;
     position: relative;
     .box {
       width: 100%;
@@ -147,7 +147,7 @@ export default {
         margin-top: -0.3rem;
         margin-bottom: 0.5rem;
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
       .item {
         width: 80%;
@@ -156,8 +156,9 @@ export default {
         margin: 0 auto;
         display: flex;
         justify-content: center;
+        align-items: center;
         img {
-          height: 100%;
+          height: 80%;
           display: inline-block;
         }
       }
