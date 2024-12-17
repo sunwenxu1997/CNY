@@ -130,6 +130,7 @@ export default {
   .block {
     width: 90%;
     position: relative;
+    top: -5vh;
     .box {
       width: 100%;
       display: block;
