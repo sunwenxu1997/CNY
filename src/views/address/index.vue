@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { saveAddress } from '@/api/user'
+import { saveAddress, getAddressById } from '@/api/user'
 import { mapGetters } from 'vuex'
 import { areaList } from '@vant/area-data'
 export default {
@@ -62,13 +62,13 @@ export default {
   },
   mounted() {
     this.form.awardId = this.$route.query.id
+    this.getAddressById()
   },
   methods: {
-    // 获取我的奖品列表
-    getMyLotteryList() {
-      //   getMyLotteryList().then((res) => {
-      //     this.prizeList = res.data
-      //   })
+    getAddressById() {
+      getAddressById({ memberId: this.memberId }).then((res) => {
+        this.form = { ...res.data }
+      })
     },
     confirmArea(arr) {
       this.form.address = arr.map((item) => item.name).join('-')

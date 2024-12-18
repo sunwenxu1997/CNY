@@ -70,11 +70,12 @@ export function saveAddress(data) {
 }
 
 // 根据地址ID取地址信息
-export function getAddressById(data) {
+export function getAddressById(params) {
   return request({
     url: '/mktAwardAddress/detail',
     method: 'get',
-    params: data
+    params,
+    hiddenError: true
   })
 }
 
