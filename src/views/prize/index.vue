@@ -9,22 +9,7 @@
           </div>
           <div class="prize-name">{{ item.awardName }}</div>
           <div class="prize-btn" v-if="item.received">
-            <van-button round type="info" size="small" color="#f6d959" @click="toReceive(item)"
-              >点击领取
-              <wx-open-launch-weapp
-                v-if="item.awardType == 3"
-                id="launch-btn"
-                :appid="appid"
-                :path="path"
-                @error="handleErrorFn"
-                @launch="handleLaunchFn"
-              >
-                <script type="text/wxtag-template">
-                  <style>.btn { opacity:0 }</style>
-                  <button class="btn">打开小程序</button>
-                </script>
-              </wx-open-launch-weapp>
-            </van-button>
+            <van-button round type="info" size="small" color="#f6d959" @click="toReceive(item)">点击领取 </van-button>
           </div>
           <div class="prize-num" v-else>X{{ item.count }}</div>
         </div>
@@ -40,8 +25,6 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      path: 'packages/user/coupon/detail/index?id=32458411&alias=eu0t4ubq&type=promocard&sign=bf4d353aeed0dd77eb5a1b4371d6fc7d&shopAutoEnter=1',
-      appid: 'wx0f162b9d4a52f7d6',
       prizeList: []
     }
   },
@@ -91,6 +74,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#launch-btn {
+    width: 10rem;
+    height: 3rem;
+    background: red;
+}
 .app-content-100vh {
   background-size: 100% !important;
   background-image: url('../../assets/prize/底图.png');

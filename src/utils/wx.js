@@ -20,8 +20,7 @@ export function wxAuth() {
           'onMenuShareAppMessage', // 旧版分享给朋友
           'onMenuShareTimeline', // 旧版分享到朋友圈
           'chooseImage' // 选择图片
-        ],
-        openTagList: ['wx-open-launch-weapp'] // 可选，需要使用的开放标签列表
+        ]
       })
       resolve()
       wx.checkJsApi({
