@@ -11,6 +11,8 @@ import './permission' // 路由权限控制
 Vue.use(Vant)
 Vue.use(HttpInstaller)
 Vue.config.productionTip = false
+// 忽略微信小程序的标签
+Vue.config.ignoredElements = [/^wx-/]
 
 new Vue({
   router,

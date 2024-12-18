@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import { getLotteryCount, getLotteryList } from '@/api/user'
+import { getLotteryCount, getLotteryList, shareCount } from '@/api/user'
 import { gsap } from 'gsap'
 import { mapGetters } from 'vuex'
 import ShareActivity from '@/components/ShareActivity'
@@ -98,6 +98,9 @@ export default {
   },
   computed: {
     ...mapGetters(['memberId'])
+  },
+  created() {
+    this.checkNewUser()
   },
   mounted() {
     this.getLotteryList()
@@ -180,6 +183,15 @@ export default {
           this.showLotteryList = true
         }
       })
+    },
+    // 页面首次加载判断是否是要请新用户参与活动，获取奖励
+    // 当路由参数同时存在openid（被邀请人openid）和memberId（邀请人memberId）时，说明是邀请了新用户
+    checkNewUser() {
+      const { openid, memberId } = this.$route.query
+      if (openid && memberId) {
+        // type 2 代表邀请新用户
+        shareCount({ invitedMemberOpenId: openid, memberId, type: 2 })
+      }
     }
   }
 }

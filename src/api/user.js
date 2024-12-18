@@ -87,3 +87,13 @@ export function getMemberInfo(data) {
     hiddenError: true
   })
 }
+
+// 分享得次数
+export function shareCount(data) {
+  return request({
+    url: '/mktShare/save',
+    method: 'post',
+    data,
+    hiddenError: true
+  })
+}

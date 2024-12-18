@@ -46,7 +46,7 @@ export default {
     // 分享到群
     shareToGroup() {
       this.showCover = true
-      this.postMessage('shareToGroup')
+      this.postMessage(1)
       wx.ready(() => {
         console.log('分享到朋友圈')
         wx.updateTimelineShareData({
@@ -59,7 +59,7 @@ export default {
     // 分享到好友
     shareToFriend() {
       this.showCover = true
-      this.postMessage('shareToFriend')
+      this.postMessage(1)
       wx.ready(() => {
         console.log('分享到好友')
         wx.updateAppMessageShareData({
@@ -70,11 +70,10 @@ export default {
       })
     },
     // 通过postMessage传递信息，通知小程序分享时的操作
-    postMessage(from) {
+    postMessage(type) {
       wx.miniProgram.postMessage({
         data: {
-          from: from, // 来源,区分是分享到群还是分享到好友
-          shareType: 'onMenuShareAppMessage', // 分享类型
+          type: type, // 1 邀请微信好友/群 4关注视频号
           openid: this.openid, // 用户openid
           memberId: this.memberId // 用户id
         }

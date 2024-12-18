@@ -9,7 +9,21 @@
           </div>
           <div class="prize-name">{{ item.awardName }}</div>
           <div class="prize-btn" v-if="item.received">
-            <van-button round type="info" size="small" color="#f6d959" @click="toReceive(item)">点击领取</van-button>
+            <van-button round type="info" size="small" color="#f6d959" @click="toReceive(item)"
+              >点击领取
+              <wx-open-launch-weapp
+                v-if="item.awardType == 3"
+                id="launch-btn"
+                env-version="release"
+                appid="wx0f162b9d4a52f7d6"
+                path="packages/user/coupon/detail/index?id=32458411&alias=eu0t4ubq&type=promocard&sign=bf4d353aeed0dd77eb5a1b4371d6fc7d&shopAutoEnter=1"
+              >
+                <script type="text/wxtag-template">
+                  <style>.btn { opacity:0 }</style>
+                  <button class="btn">打开小程序</button>
+                </script>
+              </wx-open-launch-weapp>
+            </van-button>
           </div>
           <div class="prize-num" v-else>X{{ item.count }}</div>
         </div>
@@ -55,6 +69,7 @@ export default {
               'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=NU_nEdwNEVuFfL&check_type=2#wechat_redirect'
           } else if (awardType == 2) {
             window.location.href = awardUrl
+          } else if (awardType == 3) {
           } else {
             this.$toast('领取成功')
             this.$router.replace({ name: 'Home' })
