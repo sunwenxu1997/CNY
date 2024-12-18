@@ -14,9 +14,10 @@
               <wx-open-launch-weapp
                 v-if="item.awardType == 3"
                 id="launch-btn"
-                env-version="release"
-                appid="wx0f162b9d4a52f7d6"
-                path="packages/user/coupon/detail/index?id=32458411&alias=eu0t4ubq&type=promocard&sign=bf4d353aeed0dd77eb5a1b4371d6fc7d&shopAutoEnter=1"
+                :appid="appid"
+                :path="path"
+                @error="handleErrorFn"
+                @launch="handleLaunchFn"
               >
                 <script type="text/wxtag-template">
                   <style>.btn { opacity:0 }</style>
@@ -39,6 +40,8 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      path: 'packages/user/coupon/detail/index?id=32458411&alias=eu0t4ubq&type=promocard&sign=bf4d353aeed0dd77eb5a1b4371d6fc7d&shopAutoEnter=1',
+      appid: 'wx0f162b9d4a52f7d6',
       prizeList: []
     }
   },
@@ -49,6 +52,12 @@ export default {
     this.getMyLotteryList()
   },
   methods: {
+    handleLaunchFn(e) {
+      console.log('handleLaunchFn', e)
+    },
+    handleErrorFn(e) {
+      console.log('handleErrorFn', e)
+    },
     // 获取我的奖品列表
     getMyLotteryList() {
       getMyLotteryList({ memberId: this.memberId }).then((res) => {
