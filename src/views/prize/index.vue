@@ -62,6 +62,8 @@ export default {
           } else if (awardType == 2) {
             window.location.href = awardUrl
           } else if (awardType == 3) {
+            window.location.href =
+              'https://shop144012605.youzan.com/wscump/coupon/fetch?alias=eu0t4ubq&sign=bf4d353aeed0dd77eb5a1b4371d6fc7d&shopAutoEnter=1'
           } else {
             this.$toast('领取成功')
             this.$router.replace({ name: 'Home' })
@@ -75,9 +77,9 @@ export default {
 
 <style lang="scss" scoped>
 #launch-btn {
-    width: 10rem;
-    height: 3rem;
-    background: red;
+  width: 10rem;
+  height: 3rem;
+  background: red;
 }
 .app-content-100vh {
   background-size: 100% !important;
