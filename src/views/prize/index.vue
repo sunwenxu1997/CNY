@@ -49,7 +49,7 @@ export default {
     },
     // 领取奖品，和动画执行完领取奖品方法一致
     toReceive(row) {
-      const { awardType, awardId, awardUrl } = row
+      const { awardType, awardId, awardUrl, jumpToUrl } = row
       // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
       if (awardType == 4) {
         this.$router.push({ name: 'Address', query: { id: awardId } })
@@ -58,12 +58,12 @@ export default {
         receivePrize({ memberId: this.memberId, awardId: awardId }).then((res) => {
           if (awardType == 1) {
             window.location.href =
-              'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=NU_nEdwNEVuFfL&check_type=2#wechat_redirect'
+              jumpToUrl || 'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=NU_nEdwNEVuFfL&check_type=2#wechat_redirect'
           } else if (awardType == 2) {
             window.location.href = awardUrl
           } else if (awardType == 3) {
             window.location.href =
-              'https://shop144012605.youzan.com/wscump/coupon/fetch?alias=eu0t4ubq&sign=bf4d353aeed0dd77eb5a1b4371d6fc7d&shopAutoEnter=1'
+              jumpToUrl || 'https://shop144012605.youzan.com/wscump/coupon/fetch?alias=eu0t4ubq&sign=bf4d353aeed0dd77eb5a1b4371d6fc7d&shopAutoEnter=1'
           } else {
             this.$toast('领取成功')
             this.$router.replace({ name: 'Home' })
