@@ -3,13 +3,13 @@
     <img class="title" src="@/assets/prize/我的奖品字.png" alt="" />
     <div class="prize-content">
       <div class="prize-list" v-if="prizeList.length > 0">
-        <div class="prize-item" v-for="(item, index) in prizeList" :key="index">
+        <div class="prize-item" v-for="(item, index) in prizeList" :key="index" @click="toReceive(item)">
           <div class="prize-img">
             <img :src="item.awardUrl" alt="" />
           </div>
           <div class="prize-name">{{ item.awardName }}</div>
           <div class="prize-btn" v-if="item.received == 1">
-            <van-button round type="info" size="small" color="#f6d959" @click="toReceive(item)">点击领取 </van-button>
+            <van-button round type="info" size="small" color="#f6d959">点击领取 </van-button>
           </div>
           <div class="prize-num" v-else>X{{ item.count }}</div>
         </div>
@@ -48,25 +48,25 @@ export default {
       })
     },
     // 领取奖品，和动画执行完领取奖品方法一致
-    toReceive(row) {
-      const { awardType, awardId, awardUrl, jumpToUrl } = row
+    async toReceive(row) {
+      const { awardType, awardId, awardUrl, jumpToUrl, received } = row
       // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
-      if (awardType == 4) {
+      if (awardType == 4 && received == 1) {
         this.$router.push({ name: 'Address', query: { id: awardId } })
       } else {
-        // 非实物直接领取
-        receivePrize({ memberId: this.memberId, awardId: awardId }).then((res) => {
-          if (awardType == 1) {
-            window.location.href = jumpToUrl
-          } else if (awardType == 2) {
-            window.location.href = awardUrl
-          } else if (awardType == 3) {
-            window.location.href = jumpToUrl
-          } else {
-            this.$toast('领取成功')
-            this.$router.replace({ name: 'Home' })
-          }
-        })
+        if (received == 1) {
+          await receivePrize({ memberId: this.memberId, awardId })
+        }
+        if (awardType == 1) {
+          window.location.href = jumpToUrl
+        } else if (awardType == 2) {
+          window.location.href = awardUrl
+        } else if (awardType == 3) {
+          window.location.href = jumpToUrl
+        } else {
+          this.$toast('领取成功')
+          this.$router.replace({ name: 'Home' })
+        }
       }
     }
   }

@@ -85,7 +85,7 @@ export default {
     },
     // 关注视频号
     followVideo() {
-      wx.miniProgram.navigateTo({
+      wx.miniProgram.redirectTo({
         url: '/packages/pages/cny-camp-christmas/index?toVideo=true'
       })
       // 跳转视频号，只要用户点击了，就算分享成功
