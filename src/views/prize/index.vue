@@ -8,7 +8,7 @@
             <img :src="item.awardUrl" alt="" />
           </div>
           <div class="prize-name">{{ item.awardName }}</div>
-          <div class="prize-btn" v-if="item.received">
+          <div class="prize-btn" v-if="item.received == 1">
             <van-button round type="info" size="small" color="#f6d959" @click="toReceive(item)">点击领取 </van-button>
           </div>
           <div class="prize-num" v-else>X{{ item.count }}</div>
@@ -49,7 +49,7 @@ export default {
     },
     // 领取奖品，和动画执行完领取奖品方法一致
     toReceive(row) {
-      const { awardType, awardId, awardUrl } = row
+      const { awardType, awardId, awardUrl, jumpToUrl } = row
       // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
       if (awardType == 4) {
         this.$router.push({ name: 'Address', query: { id: awardId } })
@@ -57,11 +57,11 @@ export default {
         // 非实物直接领取
         receivePrize({ memberId: this.memberId, awardId: awardId }).then((res) => {
           if (awardType == 1) {
-            window.location.href =
-              'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=NU_nEdwNEVuFfL&check_type=2#wechat_redirect'
+            window.location.href = jumpToUrl
           } else if (awardType == 2) {
             window.location.href = awardUrl
           } else if (awardType == 3) {
+            window.location.href = jumpToUrl
           } else {
             this.$toast('领取成功')
             this.$router.replace({ name: 'Home' })
@@ -75,9 +75,9 @@ export default {
 
 <style lang="scss" scoped>
 #launch-btn {
-    width: 10rem;
-    height: 3rem;
-    background: red;
+  width: 10rem;
+  height: 3rem;
+  background: red;
 }
 .app-content-100vh {
   background-size: 100% !important;

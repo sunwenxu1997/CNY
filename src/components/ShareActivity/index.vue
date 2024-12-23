@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { shareCount } from '@/api/user'
 import wx from 'weixin-js-sdk'
 import { mapGetters } from 'vuex'
 export default {
@@ -82,9 +83,10 @@ export default {
     // 关注视频号
     followVideo() {
       wx.miniProgram.navigateTo({
-        // url: '/pages/wxVideo/index'
-        url: '/pages/web/index?wxVideo=1'
+        url: '/packages/pages/cny-camp-christmas/index?toVideo=true'
       })
+      // 跳转视频号，只要用户点击了，就算分享成功
+      shareCount({ memberId: this.memberId, type: 4 })
     }
   }
 }

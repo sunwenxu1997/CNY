@@ -51,6 +51,11 @@ const routes = [
     meta: { title: '填写地址' }
   },
   {
+    path: '/iframe',
+    name: 'Iframe',
+    component: () => import('@/views/iframe/index.vue'),
+  },
+  {
     path: '/404',
     component: () => import('@/views/404')
   },

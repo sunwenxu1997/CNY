@@ -82,7 +82,7 @@ export default {
       }
     },
     toReceive() {
-      const { awardType, id, awardUrl } = this.lotteryItem
+      const { awardType, id, awardUrl, jumpToUrl } = this.lotteryItem
       // 奖品类型 1 微信红包封面 2 手机壁纸 3 KA优惠卷 4 实物奖品
       if (awardType == 4) {
         this.$router.push({ name: 'Address', query: { id: id } })
@@ -90,10 +90,11 @@ export default {
         // 非实物直接领取
         receivePrize({ memberId: this.memberId, awardId: id }).then((res) => {
           if (awardType == 1) {
-            window.location.href =
-              'https://support.weixin.qq.com/cgi-bin/mmsupport-bin/showredpacket?receiveuri=NU_nEdwNEVuFfL&check_type=2#wechat_redirect'
+            window.location.href = jumpToUrl
           } else if (awardType == 2) {
             window.location.href = awardUrl
+          } else if (awardType == 3) {
+            window.location.href = jumpToUrl
           } else {
             this.$toast('领取成功')
             this.$router.replace({ name: 'Home' })
