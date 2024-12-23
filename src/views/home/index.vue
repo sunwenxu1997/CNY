@@ -142,10 +142,10 @@ export default {
             let timer = setInterval(() => {
               this.countDown--
               if (this.countDown <= 0) {
-                clearInterval(timer)
                 this.showCover = false
                 this.countDown = 3
                 this.$router.push('/play')
+                clearInterval(timer)
               }
             }, 1000)
           }

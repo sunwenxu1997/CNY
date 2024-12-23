@@ -4,8 +4,8 @@
       <div class="wrapper">
         <div class="block" @click.stop>
           <img style="width: 80%" src="@/assets/shareActivity/大礼包@2x.png" alt="" />
-          <img style="width: 80%; margin-top: -20%" class="title" src="@/assets/shareActivity/再玩一次@2x.png" alt="" />
-          <img style="margin-top: -5%" src="@/assets/shareActivity/弹窗@2x.png" alt="" />
+          <img style="width: 80%; margin-top: -15%" class="title" src="@/assets/shareActivity/再玩一次@2x.png" alt="" />
+          <img style="margin-top: 0%" src="@/assets/shareActivity/弹窗@2x.png" alt="" />
           <div class="content">
             <div>
               <img class="btn" src="@/assets/shareActivity/分享群正常.png" alt="" @click="shareToGroup" />
@@ -18,8 +18,11 @@
     </van-overlay>
     <van-overlay z-index="5" :show="showCover" @click="showCover = false">
       <div class="wrapper">
-        <!-- 提示点击右上角分享给朋友 -->
-        <span class="right-top-hint" style="position: absolute; top: 2vh; right: 3vw; font-size: 1.5rem; color: white">请点击右上角分享</span>
+        <div class="right-top-hint">
+          <!-- 提示点击右上角分享给朋友 -->
+          <img src="@/assets/shareActivity/share_icon.png" alt="" />
+          <span>点击右上角分享</span>
+        </div>
       </div>
     </van-overlay>
   </div>
@@ -126,6 +129,18 @@ export default {
       margin-bottom: 1rem;
       border-radius: 0.7rem;
     }
+  }
+}
+.right-top-hint {
+  position: absolute;
+  top: 2vh;
+  right: 3vw;
+  font-size: 1.2rem;
+  color: white;
+  img {
+    width: 2rem;
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
   }
 }
 </style>
