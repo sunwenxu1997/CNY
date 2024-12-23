@@ -73,7 +73,7 @@ export default {
     postMessage(type) {
       wx.miniProgram.postMessage({
         data: {
-          type: type, // 1 邀请微信好友/群 4关注视频号
+          type: type, // 1 邀请微信好友/群
           openid: this.openid, // 用户openid
           memberId: this.memberId // 用户id
         }
