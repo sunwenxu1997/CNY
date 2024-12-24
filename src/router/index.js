@@ -54,11 +54,13 @@ const routes = [
     path: '/wallpaper',
     name: 'Wallpaper',
     component: () => import('@/views/wallpaper/index.vue'),
+    meta: { title: '领取壁纸' }
   },
   {
     path: '/coupon',
     name: 'Coupon',
     component: () => import('@/views/coupon/index.vue'),
+    meta: { title: '领取优惠券' }
   },
   {
     path: '/404',
@@ -76,7 +78,7 @@ const createRouter = () =>
 const router = createRouter()
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || '数字欧普'
+  document.title = to.meta.title || '好运签'
   next()
 })
 

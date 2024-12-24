@@ -7,9 +7,6 @@
     </div>
     <div class="dot-box">
       <img class="guang-huan" src="@/assets/getMaterial/背景光.png" alt="" />
-      <!-- <div class="dot" v-for="(item, index) in elementsList" :key="index">
-        <img :src="item.url" alt="" />
-      </div> -->
     </div>
   </div>
 </template>
@@ -51,46 +48,18 @@ export default {
     }
   },
   created() {
-    // this.initElements()
   },
   mounted() {
     // console.log(gsap.utils.random(-100, 100, 1))
 
     gsap.from('#material', { duration: 0.5, opacity: 0, y: '100vh' })
-    this.playElements()
     this.getPrize()
   },
   methods: {
-    // 创建素材背景元素，漩涡状动画
-    initElements() {
-      // 创建50个元素到elementsList
-      for (let i = 0; i < 30; i++) {
-        const sizeIndex = gsap.utils.random(0, 2, 1)
-        const url = require(`../../assets/${this.elements[sizeIndex]}`)
-        this.elementsList.push({ url })
-      }
-    },
-    // 播放元素动画
-    playElements() {
-      const dotList = document.querySelectorAll('.dot')
-      dotList.forEach((item, index) => {
-        const rotateZ = gsap.utils.random(-1500, -100, 100)
-        gsap.to(item, {
-          duration: 0,
-          // 旋转度数越大，透明度越高，最大为1
-          opacity: Math.abs(rotateZ) / 1000,
-          rotateZ: rotateZ,
-          scale: gsap.utils.random(0.3, 5)
-          // repeat: -1,
-          // repeatRefresh: true
-        })
-      })
-    },
     // 获取奖品
     getPrize() {
       // 随机获得一个奖品
       // const index = gsap.utils.random(0, 2, 1)
-
       // 根据牙膏动画结束后调用的奖品接口返回的奖品类型，获取对应的奖品
       this.prizeItem = this.prizeList.find((item) => item.belongTo == this.belongTo)
       // 光环按照步骤依次转动
