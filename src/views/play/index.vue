@@ -31,6 +31,7 @@ import GetMaterial from '@/components/GetMaterial/index.vue'
 import Bamboo from '@/components/Bamboo/index.vue'
 import { lottery, receivePrize, getLotteryCount } from '@/api/user'
 import { mapGetters } from 'vuex'
+import wx from 'weixin-js-sdk'
 export default {
   name: 'Play',
   components: {
@@ -90,7 +91,10 @@ export default {
         // 非实物直接领取
         receivePrize({ memberId: this.memberId, awardId: id }).then((res) => {
           if (awardType == 1) {
-            window.location.href = jumpToUrl
+            // window.location.href = jumpToUrl
+            wx.miniProgram.navigateTo({
+              url: `/packages/pages/cny-camp-christmas/redCover?url=${encodeURIComponent(jumpToUrl)}`
+            })
           } else if (awardType == 2) {
             window.location.href = awardUrl
           } else if (awardType == 3) {

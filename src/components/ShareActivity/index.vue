@@ -134,7 +134,7 @@ export default {
 .right-top-hint {
   position: absolute;
   top: 2vh;
-  right: 3vw;
+  right: 8vw;
   font-size: 1.2rem;
   color: white;
   img {

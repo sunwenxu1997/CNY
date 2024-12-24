@@ -289,7 +289,7 @@ export default {
   width: 100%;
   height: 100%;
   .block {
-    width: 78%;
+    width: 85%;
     position: relative;
   }
   img {
