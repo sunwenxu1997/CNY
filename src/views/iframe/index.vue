@@ -1,7 +1,5 @@
 <template>
-  <div class="cny-iframe">
-    <iframe :src="url"></iframe>
-  </div>
+  <iframe :src="url"></iframe>
 </template>
 
 <script>
@@ -17,9 +15,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.cny-iframe {
-  iframe {
+<style lang="scss" scoped>
+iframe {
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -29,5 +26,4 @@ export default {
       width: 100vw;
     }
   }
-}
 </style>

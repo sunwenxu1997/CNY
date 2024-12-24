@@ -7,9 +7,9 @@
     </div>
     <div class="dot-box">
       <img class="guang-huan" src="@/assets/getMaterial/背景光.png" alt="" />
-      <div class="dot" v-for="(item, index) in elementsList" :key="index">
+      <!-- <div class="dot" v-for="(item, index) in elementsList" :key="index">
         <img :src="item.url" alt="" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -51,7 +51,7 @@ export default {
     }
   },
   created() {
-    this.initElements()
+    // this.initElements()
   },
   mounted() {
     // console.log(gsap.utils.random(-100, 100, 1))

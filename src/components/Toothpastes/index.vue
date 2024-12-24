@@ -56,7 +56,7 @@ export default {
     return {
       isAllShow: true, // 是否显示整个牙膏动画,用于后期销毁动画
       progressValue: 0,
-      progressTimeCount: 10,
+      progressTimeCount: 5,
       dotNum: 200,
       dotList: [],
       elements: ['锦鲤元素.png', '桃花元素.png', '元宝元素.png'],
@@ -70,19 +70,8 @@ export default {
     // 检验用户连续点击次数是否大于等于minClickCount
     checkoutClick() {
       // 进度开始后，不允许再次点击
-      if (this.progressValue > 0) return
-      this.clickTimer && clearInterval(this.clickTimer)
-      this.clickCount++
-      // 如果用户在1秒内没有连续点击minClickCount次，点击次数持续递减
-      // 创建一个定时器，每秒减少一次点击次数
-      this.clickTimer = setInterval(() => {
-        if (this.clickCount > 0) this.clickCount--
-      }, 500)
-      if (this.clickCount >= this.minClickCount) {
-        clearInterval(this.clickTimer)
-        this.clickCount = 0
-        this.clickBody()
-      }
+      if (this.dotList.length > 0) return
+      this.clickBody()
     },
     clickBody() {
       this.initBubble()
