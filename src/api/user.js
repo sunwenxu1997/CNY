@@ -90,11 +90,11 @@ export function getMemberInfo(data) {
 }
 
 // 分享得次数
-export function shareCount(data) {
+export function shareCount(data, hiddenError = true) {
   return request({
     url: '/mktShare/save',
     method: 'post',
     data,
-    hiddenError: true
+    hiddenError
   })
 }

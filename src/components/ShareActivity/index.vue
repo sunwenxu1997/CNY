@@ -83,6 +83,10 @@ export default {
           memberId: this.memberId // 用户id
         }
       })
+      // 用户只要点击了分享，就算分享成功
+      shareCount({ memberId: this.memberId, type: type }, false).then((res) => {
+        this.$toast(res.data)
+      })
     },
     // 关注视频号
     followVideo() {
