@@ -119,7 +119,7 @@ export default {
     position: absolute;
     width: 78%;
     height: 42%;
-    bottom: 9%;
+    bottom: 7%;
     left: 11%;
     display: flex;
     justify-content: center;
@@ -134,7 +134,7 @@ export default {
 .right-top-hint {
   position: absolute;
   top: 2vh;
-  right: 8vw;
+  right: 16vw;
   font-size: 1.2rem;
   color: white;
   img {

@@ -51,6 +51,8 @@ export default {
     },
     play() {
       const tl = gsap.timeline({ defaults: { duration: 1, ease: 'elastic' } })
+      // 整体增加摇桶速度
+      gsap.to(tl, { timeScale: 1.1 })
       tl.to('.bamboo-box', { rotate: -5 })
       tl.to(
         '.bamboo-box',

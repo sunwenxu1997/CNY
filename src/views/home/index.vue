@@ -83,8 +83,8 @@ export default {
     return {
       backgroundList: [
         { url: require('../../assets/首页-白鹿背景.png') },
-        { url: require('../../assets/首页-麦玲玲背景.png') },
         { url: require('../../assets/首页-牙膏背景.png') },
+        { url: require('../../assets/首页-麦玲玲背景.png') },
         { url: require('../../assets/首页-牙刷背景.png') }
       ],
       lotteryCount: 0,

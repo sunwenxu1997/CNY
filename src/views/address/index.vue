@@ -32,6 +32,7 @@
     <div class="submit" @click="submit">
       <img src="@/assets/prize/立即提交@3x.png" alt="" />
     </div>
+    <img class="bottom-hint" src="@/assets/prize/活动结束时间.png" alt="">
     <van-popup v-model="showPicker" position="bottom">
       <van-area :area-list="areaList" @confirm="confirmArea" />
     </van-popup>
@@ -158,5 +159,11 @@ export default {
     width: 100%;
     display: block;
   }
+}
+.bottom-hint{
+    width: 80%;
+    position: absolute;
+    left: 10%;
+    bottom: 5%;
 }
 </style>

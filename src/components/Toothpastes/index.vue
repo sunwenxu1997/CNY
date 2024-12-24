@@ -62,7 +62,7 @@ export default {
       elements: ['锦鲤元素.png', '桃花元素.png', '元宝元素.png'],
       clickTimer: null,
       clickCount: 0,
-      minClickCount: 10 // 最少点击次数，点击次数大于等于这个值才会触发
+      minClickCount: 1 // 最少点击次数，点击次数大于等于这个值才会触发
     }
   },
   mounted() {},

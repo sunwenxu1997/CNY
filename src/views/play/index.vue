@@ -93,7 +93,7 @@ export default {
           if (awardType == 1) {
             // window.location.href = jumpToUrl
             wx.miniProgram.navigateTo({
-              url: `/packages/pages/cny-camp-christmas/redCover?url=${encodeURIComponent(jumpToUrl)}`
+              url: `/packages/pages/cny-camp-christmas/redCover?url=${encodeURIComponent(jumpToUrl)}&cover=${encodeURIComponent(awardUrl)}`
             })
           } else if (awardType == 2) {
             window.location.href = awardUrl
