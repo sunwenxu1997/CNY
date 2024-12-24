@@ -82,7 +82,7 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+// see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
