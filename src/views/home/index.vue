@@ -305,15 +305,17 @@ export default {
   }
   .content {
     position: absolute;
-    width: 76%;
+    width: 80%;
     height: 70%;
     top: 20%;
-    left: 12%;
+    left: 10%;
     color: #fffadc;
     font-family: 'MEllanPRC-Xbold';
     font-size: 0.8rem;
     -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
+    white-space: nowrap;
+    text-align: center;
     table {
       width: 100%;
       thead {
