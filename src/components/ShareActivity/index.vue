@@ -4,7 +4,7 @@
       <div class="wrapper">
         <div class="block" @click.stop>
           <img style="width: 80%" src="@/assets/shareActivity/大礼包@2x.png" alt="" />
-          <img style="width: 80%; margin-top: -15%" class="title" src="@/assets/shareActivity/再玩一次@2x.png" alt="" />
+          <img style="width: 80%; margin-top: -8%" class="title" src="@/assets/shareActivity/再玩一次@2x.png" alt="" />
           <img style="margin-top: 0%" src="@/assets/shareActivity/弹窗@2x.png" alt="" />
           <div class="content">
             <div>
@@ -13,6 +13,7 @@
               <img class="btn" src="@/assets/shareActivity/关注视频号正常.png" alt="" @click="followVideo" />
             </div>
           </div>
+          <img class="close" src="@/assets/关闭小按钮.png" alt="" @click="showDialog = false" />
         </div>
       </div>
     </van-overlay>
@@ -119,7 +120,7 @@ export default {
     position: absolute;
     width: 78%;
     height: 42%;
-    bottom: 7%;
+    bottom: 10%;
     left: 11%;
     display: flex;
     justify-content: center;
@@ -129,6 +130,13 @@ export default {
       margin-bottom: 1rem;
       border-radius: 0.7rem;
     }
+  }
+  .close {
+    position: absolute;
+    left: 40%;
+    bottom: -10%;
+    width: 20%;
+    z-index: 5;
   }
 }
 .right-top-hint {

@@ -51,9 +51,14 @@ const routes = [
     meta: { title: '填写地址' }
   },
   {
-    path: '/iframe',
-    name: 'Iframe',
-    component: () => import('@/views/iframe/index.vue'),
+    path: '/wallpaper',
+    name: 'Wallpaper',
+    component: () => import('@/views/wallpaper/index.vue'),
+  },
+  {
+    path: '/coupon',
+    name: 'Coupon',
+    component: () => import('@/views/coupon/index.vue'),
   },
   {
     path: '/404',

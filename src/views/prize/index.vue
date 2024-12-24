@@ -63,9 +63,11 @@ export default {
             url: `/packages/pages/cny-camp-christmas/redCover?url=${encodeURIComponent(jumpToUrl)}&cover=${encodeURIComponent(awardUrl)}`
           })
         } else if (awardType == 2) {
-          window.location.href = awardUrl
+        //   window.location.href = awardUrl
+            this.$router.push({ name: 'Wallpaper', query: { url: awardUrl } })
         } else if (awardType == 3) {
-          window.location.href = jumpToUrl
+          //   window.location.href = jumpToUrl
+          this.$router.push({ name: 'Coupon' })
         } else {
           this.$toast('领取成功')
           this.$router.replace({ name: 'Home' })
