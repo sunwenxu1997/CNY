@@ -29,6 +29,8 @@ const mutations = {
   },
   SET_OPENID: (state, openid) => {
     state.openid = openid
+    // 会话临时缓存openid
+    window.sessionStorage.setItem('openid', openid)
   }
 }
 
@@ -53,7 +55,7 @@ const actions = {
   // get user info
   getInfo({ commit }, openid) {
     return new Promise((resolve, reject) => {
-      getMemberInfo({ openid })
+      getMemberInfo({ openid: openid || window.sessionStorage.getItem('openid') })
         .then((response) => {
           const { data } = response
           if (!data) {
