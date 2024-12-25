@@ -85,7 +85,10 @@ export default {
       })
       // 用户只要点击了分享，就算分享成功
       shareCount({ memberId: this.memberId, type: type }, false).then((res) => {
-        this.$toast(res.data)
+        // 判断返回文字是否包含成功，如果包含则不提示
+        if (!res.data.includes('成功')) {
+          this.$toast(res.data)
+        }
       })
     },
     // 关注视频号
