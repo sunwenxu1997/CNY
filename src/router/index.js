@@ -60,7 +60,7 @@ const routes = [
     path: '/coupon',
     name: 'Coupon',
     component: () => import('@/views/coupon/index.vue'),
-    meta: { title: '好运签,跳转很丝滑~' }
+    meta: { title: '好运签' }
   },
   {
     path: '/404',
