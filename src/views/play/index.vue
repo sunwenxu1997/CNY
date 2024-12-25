@@ -62,6 +62,9 @@ export default {
       lottery({ memberId: this.memberId }).then((res) => {
         this.lotteryItem = res.data
         this.step = 2
+      }).catch(() => {
+        // 没有抽奖次数时，默认跳回首页
+        this.$router.replace({ name: 'Home' })
       })
     },
     onGetMaterialComplete() {
