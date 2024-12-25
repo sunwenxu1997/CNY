@@ -32,7 +32,7 @@
     <div class="submit" @click="submit">
       <img src="@/assets/prize/立即提交@3x.png" alt="" />
     </div>
-    <img class="bottom-hint" src="@/assets/prize/活动结束时间.png" alt="">
+    <img class="bottom-hint" src="@/assets/prize/活动结束时间.png" alt="" />
     <van-popup v-model="showPicker" position="bottom">
       <van-area :area-list="areaList" @confirm="confirmArea" />
     </van-popup>
@@ -68,7 +68,9 @@ export default {
   methods: {
     getAddressById() {
       getAddressById({ memberId: this.memberId }).then((res) => {
-        this.form = { ...res.data }
+        // 前端不需要awardId，避免和路由参数冲突
+        delete res.data.awardId
+        this.form = { ...this.form, ...res.data }
       })
     },
     confirmArea(arr) {
@@ -160,10 +162,10 @@ export default {
     display: block;
   }
 }
-.bottom-hint{
-    width: 80%;
-    position: absolute;
-    left: 10%;
-    bottom: 5%;
+.bottom-hint {
+  width: 80%;
+  position: absolute;
+  left: 10%;
+  bottom: 5%;
 }
 </style>
