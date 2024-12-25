@@ -104,9 +104,6 @@ export default {
           } else if (awardType == 3) {
             // window.location.href = jumpToUrl
             this.$router.push({ name: 'Coupon' })
-          } else {
-            this.$toast('领取成功')
-            this.$router.replace({ name: 'Home' })
           }
         })
       }
