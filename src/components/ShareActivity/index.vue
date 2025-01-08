@@ -11,6 +11,7 @@
               <img class="btn" src="@/assets/shareActivity/分享群正常.png" alt="" @click="shareToGroup" />
               <img class="btn" src="@/assets/shareActivity/分享好友正常.png" alt="" @click="shareToFriend" />
               <img class="btn" src="@/assets/shareActivity/关注视频号正常.png" alt="" @click="followVideo" />
+              <img class="btn" src="@/assets/shareActivity/关注好来.png" alt="" @click="followOfficial" />
             </div>
           </div>
           <img class="close" src="@/assets/关闭小按钮.png" alt="" @click="showDialog = false" />
@@ -98,6 +99,13 @@ export default {
         url: '/packages/pages/cny-camp-christmas/index?toVideo=true'
       })
       // 跳转视频号，只要用户点击了，就算分享成功
+      shareCount({ memberId: this.memberId, type: 4 })
+    },
+    // 关注好来公众号
+    followOfficial() {
+      // 跳转链接地址
+      window.location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA5NDgzMTczMw==&scene=110#wechat_redirect'
+      // 跳转官方号，只要用户点击了，就算关注成功
       shareCount({ memberId: this.memberId, type: 4 })
     }
   }
