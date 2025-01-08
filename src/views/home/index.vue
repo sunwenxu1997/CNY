@@ -291,6 +291,19 @@ export default {
   .block {
     width: 85%;
     position: relative;
+    &::after {
+      width: 70%;
+      content: '为尊重及保障个人隐私，已对本页面信息作去隐私化处理，请知悉';
+      display: block;
+      font-size: 0.65rem;
+      color: white;
+      position: absolute;
+      left: 15%;
+      bottom: 10%;
+      text-align: center;
+      white-space: pre-wrap;
+      padding: 0.5rem;
+    }
   }
   img {
     width: 100%;
@@ -316,6 +329,7 @@ export default {
     overflow-y: scroll;
     white-space: nowrap;
     text-align: center;
+    padding-bottom: calc(10% + 1rem);
     table {
       width: 100%;
       thead {
