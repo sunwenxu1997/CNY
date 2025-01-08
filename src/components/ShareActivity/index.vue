@@ -106,7 +106,12 @@ export default {
       // 跳转链接地址
       window.location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA5NDgzMTczMw==&scene=110#wechat_redirect'
       // 跳转官方号，只要用户点击了，就算关注成功
-      shareCount({ memberId: this.memberId, type: 4 })
+      shareCount({ memberId: this.memberId, type: 5 }, false).then((res) => {
+        // 判断返回文字是否包含成功，如果包含则不提示
+        if (!res.data.includes('成功')) {
+          this.$toast(res.data)
+        }
+      })
     }
   }
 }
