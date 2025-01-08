@@ -22,7 +22,8 @@
         <div class="right-top-hint">
           <!-- 提示点击右上角分享给朋友 -->
           <img src="@/assets/shareActivity/share_icon.png" alt="" />
-          <span>点击右上角分享</span>
+          <p>点击右上角分享</p>
+          <p>成功邀请老会员 <span class="count">+1</span> ，新会员 <span class="count">+2</span> </p>
         </div>
       </div>
     </van-overlay>
@@ -150,8 +151,19 @@ export default {
   position: absolute;
   top: 2vh;
   right: 16vw;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: white;
+  text-align: right;
+  font-family: 'MEllanPRC-Xbold';
+  p{
+    margin: 0.5rem 0;
+  }
+  .count{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fffadc;
+    text-shadow: 0 0 5px #dc372b;
+  }
   img {
     width: 2rem;
     margin-right: 0.5rem;
